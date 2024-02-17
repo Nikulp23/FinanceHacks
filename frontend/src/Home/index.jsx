@@ -7,32 +7,14 @@ import Content from '../Components/Content/Content'
 
 const Home = () => {
   const [selectedOption, setSelectedOption] = useState('welcome');
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [banks, setBanks] = useState([]);
 
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        let latitude = position.coords.latitude;
-        let longitude = position.coords.longitude;
-      
-        setSelectedAddress([latitude,longitude]);
-
-        console.log("HOME: ", selectedAddress)
-      });
-    }
-    else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  
-  
 
   return (
    <>
       {/* <NavBar /> */}
-      <Sidebar setSelectedOption={setSelectedOption} selectedAddress={selectedAddress}/>  
-      <Content selectedOption={selectedOption}/>
+      <Sidebar setSelectedOption={setSelectedOption} banks={banks} setBanks={setBanks} />  
+      <Content selectedOption={selectedOption} banks={banks}/>
    </>
   )
 }

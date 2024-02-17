@@ -93,6 +93,8 @@ async function searchNearbyBanks(userLocation) {
       });
    }
    
+   bankObject.banks.sort((a, b) => a.distance - b.distance);
+
   return bankObject;
 }
 
