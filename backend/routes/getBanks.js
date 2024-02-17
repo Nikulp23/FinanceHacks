@@ -16,14 +16,20 @@ router.post(`/${parsed.name}`, async (req, res) => {
 
    const USER_ADDRESS = req.body.USER_ADDRESS;
 
-   const updatedPrompt = getBanksPrompt.replace('USER_ADDRESS', USER_ADDRESS);
+   const updatedPrompt = getBanksPrompt.replaceAll('USER_ADDRESS', USER_ADDRESS);
 
    const result = await model.generateContent(updatedPrompt);
    const response = result.response;
    const text = response.text();
 
+   console.log(updatedPrompt);
    const jsonData = JSON.parse(text);
    res.json(jsonData);
 });
 
 export default router;
+
+
+// {
+//    "USER_ADDRESS": "60 Timberline Drive, Nanuet, NY"
+//  }

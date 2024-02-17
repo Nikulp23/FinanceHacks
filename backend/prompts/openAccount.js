@@ -11,8 +11,8 @@ Please respond with plaintext only. Fill in this JSON template with information 
 {
   "banks": [
     {
-      "bankname": "<Bank Name Here>",
-      "address": "<Bank Address Here>",
+      "bankname": < fill in the bank name here >,
+      "address": < fill in the bank address >,
       "account_opening_requirements": {
         "identification": [
           "List of documents required to open an account, such as a state photo ID (e.g., passport, driver's license, social security)"
