@@ -147,7 +147,7 @@ const getLoanInformation = async (choices) => {
     addMessageToConversation({
       text: response.data,
       sender: 'ai',
-      type: 'text'
+      type: 'json'
     });
   } catch (error) {
     console.error('API call failed:', error);

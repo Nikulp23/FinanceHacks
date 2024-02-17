@@ -25,15 +25,12 @@ router.post(`/${parsed.name}`, async (req, res) => {
       .replaceAll('LOAN_AMOUNT', LOAN_AMOUNT)
       .replaceAll('CREDIT_SCORE', CREDIT_SCORE)
 
-   const result = await model.generateContent(updatedSearchPrompt);
+   const result = await model.generateContent("what is the name");
    const response = result.response;
    const text = response.text();
 
    console.log(text);
-   // const jsonData = JSON.parse(text);
-   // res.json(jsonData);
-
-   res.send(updatedSearchPrompt);
+   res.send(text);
 });
 
 export default router;
