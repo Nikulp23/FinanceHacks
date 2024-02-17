@@ -56,3 +56,8 @@
   margin-right: 10px;
   font-size: 1.2em; 
 }
+
+.menu-item.selected {
+  background-color: rgb(26,128,229);
+  color: white;
+}
