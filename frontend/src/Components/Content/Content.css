@@ -10,3 +10,13 @@
    padding: 10px; /* Add some padding */
    box-sizing: border-box; /* Include padding in the width and height */
 }
+
+user {
+   text-align: right;
+   /* Additional styling */
+ }
+ 
+ .ai {
+   text-align: left;
+   /* Additional styling */
+ }
