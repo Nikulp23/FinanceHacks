@@ -14,10 +14,10 @@ const genAI = new GoogleGenerativeAI("AIzaSyCp4kRI9XDs4rDs6AQusexuPbHemYC5CPk");
 router.post(`/${parsed.name}`, async (req, res) => {  
    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 
-   const BANK_NAME = req.body.BANK_NAME;
-   const LOAN_TYPE = req.body.LOAN_TYPE;
-   const LOAN_AMOUNT = req.body.LOAN_AMOUNT;
-   const CREDIT_SCORE = req.body.CREDIT_SCORE;
+   const BANK_NAME = "Chase Bank";
+   const LOAN_TYPE = req.body.choices[0];
+   const LOAN_AMOUNT = "20k";
+   const CREDIT_SCORE = req.body.choices[1];
 
    const updatedSearchPrompt = loanInfoPrompt
       .replaceAll('BANK_NAME', BANK_NAME)
@@ -29,8 +29,11 @@ router.post(`/${parsed.name}`, async (req, res) => {
    const response = result.response;
    const text = response.text();
 
-   const jsonData = JSON.parse(text);
-   res.json(jsonData);
+   console.log(text);
+   // const jsonData = JSON.parse(text);
+   // res.json(jsonData);
+
+   res.send(updatedSearchPrompt);
 });
 
 export default router;
