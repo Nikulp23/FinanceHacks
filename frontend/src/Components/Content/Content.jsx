@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Content.css'
-import SearchBar from '../SearchBar/SearchBar'
+import './Content.css';
+import SearchBar from '../SearchBar/SearchBar';
 
-const Content = ({selectedOption}) => {
+const Content = ({ selectedOption }) => {
   const initialMessages = {
     welcome: "Welcome to Bank of the Future! How can I assist you today?",
     openAccount: "Interested in opening an account? What type of account would you like?",
@@ -13,29 +13,28 @@ const Content = ({selectedOption}) => {
 
   const [conversation, setConversation] = useState([{ text: initialMessages[selectedOption], sender: 'ai' }]);
 
+  useEffect(() => {
+    setConversation([{ text: initialMessages[selectedOption], sender: 'ai' }]);
+  }, [selectedOption]);
+  
   const sendMessage = async (userMessage) => {
-    console.log(selectedOption)
-    console.log(initialMessages[selectedOption] )
     const updatedConversation = [...conversation, { text: userMessage, sender: 'user' }];
     setConversation(updatedConversation);
 
     try {
       const response = await axios.post('http://localhost:8080/getResponse', { conversation: updatedConversation });
-      
       setConversation(prevConvo => [...prevConvo, { text: response.data, sender: 'ai' }]);
-      console.log(conversation)
     } catch (error) {
       console.error('API call failed:', error);
     }
   };
 
   return (
-   <>
+    <>
       <div className="content">
         <div className="conversation">
           {conversation.map((message, index) => (
             <div key={index} className={`message ${message.sender}`}>
-              {/* The avatar div is always rendered, but its order will change based on the message sender */}
               <div className="avatar" />
               <span>{message.text}</span>
             </div>
@@ -43,9 +42,8 @@ const Content = ({selectedOption}) => {
         </div>
         <SearchBar onSend={sendMessage} />
       </div>   
-   </>
-  )
-}
+    </>
+  );
+};
 
-export default Content
-
+export default Content;
