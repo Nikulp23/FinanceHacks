@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import './Sidebar.css';
 import NearbyBanks from '../NearbyBanks/NearbyBanks';
 
-const Sidebar = () => {
+const Sidebar = ({ setSelectedOption }) => {
   // State to track the selected menu item, defaulting to 'welcome'
   const [selectedItem, setSelectedItem] = useState('welcome');
 
   // Function to handle menu item clicks
   const handleMenuItemClick = (itemName) => {
-    console.log(itemName); // Log the name of the clicked item
     setSelectedItem(itemName);
+    setSelectedOption(itemName); 
   };
 
   return (

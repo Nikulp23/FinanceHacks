@@ -3,10 +3,19 @@ import axios from 'axios';
 import './Content.css'
 import SearchBar from '../SearchBar/SearchBar'
 
-const Content = () => {
-  const [conversation, setConversation] = useState([]);
+const Content = ({selectedOption}) => {
+  const initialMessages = {
+    welcome: "Welcome to Bank of the Future! How can I assist you today?",
+    openAccount: "Interested in opening an account? What type of account would you like?",
+    applyLoan: "Looking to apply for a loan? What kind of loan are you interested in?",
+    selectCreditCard: "Selecting a credit card? What features are you looking for?"
+  };
+
+  const [conversation, setConversation] = useState([{ text: initialMessages[selectedOption], sender: 'ai' }]);
 
   const sendMessage = async (userMessage) => {
+    console.log(selectedOption)
+    console.log(initialMessages[selectedOption] )
     const updatedConversation = [...conversation, { text: userMessage, sender: 'user' }];
     setConversation(updatedConversation);
 

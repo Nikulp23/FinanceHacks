@@ -14,11 +14,11 @@ const NearbyBanks = () => {
     'saratoga': "/banks/saratoga.png",
     'm&t': "/banks/mt.jpg",
     'trustco': "/banks/trustco.jpg",
-    '': "/banks/",
-    '': "/banks/",
-    '': "/banks/",
-    '': "/banks/",
-    '': "/banks/"
+    // '': "/banks/",
+    // '': "/banks/",
+    // '': "/banks/",
+    // '': "/banks/",
+    // '': "/banks/"
   };
 
    // Function to fetch bank data
@@ -27,7 +27,7 @@ const NearbyBanks = () => {
        const response = await axios.post('http://localhost:8080/getBanks', {
         USER_ADDRESS: "12 Colvin Cir Troy, NY 12180"
        });
-       console.log(response);
+      //  console.log(response);
        setBanks(response.data.banks); // Assuming the API response structure includes { banks: [...] }
      } catch (error) {
        console.error('Error fetching banks:', error);
