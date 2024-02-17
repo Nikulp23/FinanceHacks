@@ -1,9 +1,9 @@
 import './NearbyBanks.css'
 // import WF from'../../assets/banks/wellsfargo.png';
-import {React, useState, useEffect} from 'react';
+import {React, useEffect} from 'react';
 import axios from 'axios';
 
-const NearbyBanks = ({ banks, setBanks }) => {
+const NearbyBanks = ({ banks, setBanks, selectedAddress}) => {
    // State to store bank data
   //  const [localBanks, setLocalBanks] = useState([]);
  
@@ -23,11 +23,11 @@ const NearbyBanks = ({ banks, setBanks }) => {
     'sunmark': "/banks/sunmark.jpg",
   };
 
-   // Function to fetch bank data
+   // Function to fetch bank data 
    const fetchBanks = async () => {
      try {
-       const response = await axios.post('http://localhost:8080/getBanks', {
-        USER_ADDRESS: "12 Colvin Cir Troy, NY 12180"
+        const response = await axios.post('http://localhost:8080/getBanks', {
+        USER_ADDRESS: selectedAddress
        });
       //  console.log(response);
        setBanks(response.data.banks); 
@@ -53,8 +53,11 @@ const NearbyBanks = ({ banks, setBanks }) => {
  
    // UseEffect to call fetchBanks on component mount
    useEffect(() => {
-     fetchBanks();
-   }, []);
+    if (selectedAddress != null){
+      fetchBanks();
+    }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [selectedAddress]);
 
   return (
     <>
