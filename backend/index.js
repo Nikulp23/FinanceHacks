@@ -5,6 +5,11 @@ import fs from 'fs';
 import { fileURLToPath, pathToFileURL } from 'url';
 import path from 'path';
 
+import fetch from 'node-fetch';
+if (!globalThis.fetch) {
+    globalThis.fetch = fetch;
+}
+
 const app = express();
 
 app.use(bodyParser.json());
