@@ -1,66 +1,73 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genAI = new GoogleGenerativeAI("AIzaSyCp4kRI9XDs4rDs6AQusexuPbHemYC5CPk"); // Your Google Generative AI API key here
+const genAI = new GoogleGenerativeAI("AIzaSyCp4kRI9XDs4rDs6AQusexuPbHemYC5CPk");
 
 const searchPrompt = `
-Finance Help:
+FINANCIAL HELP FOR OPENING A BANK ACCOUNT
 
-I have given you a bank name and it's address.
+BANK : BANK_NAME
+ADDRESS : BANK_ADDRESS
 
-The person is CITZENSHIP_STATUS, and CURRENT_AGE years old and currently WORKING_STATUS
+The person's citizenship status is CITIZENSHIP_STATUS, CURRENT_AGE years old, and is WORKING_STATUS.
 
-Please do not respond with any symbols, only plaintext. Fill in this JSON (doctors is a list of doctors, an example doctor object is shown) as your response, and respond with only the filled out JSON form below. Nothing else. Try to fill as many doctors and as much info in the JSON as you can:
-
-GIVE ME TYPES OF ACCOUNT THAT WOULD BE HELPFUL 
+Please respond with plaintext only. Fill in this JSON template with information about bank account types that would be helpful for opening a bank account, and respond with only the filled-out JSON form below. Nothing else. 
 
 {
   "banks": [
     {
       "bankname": "<Bank Name Here>",
       "address": "<Bank Address Here>",
-      "phone_number": "<Bank Phone Number Here>",
       "account_opening_requirements": {
         "identification": [
-          < documents required to open an account such as state photo ID (e.g., passport, driver's license, social security) >
+          "List of documents required to open an account, such as a state photo ID (e.g., passport, driver's license, social security)"
         ],
         "proof_of_address": [
-          < address proof documents >
+          "List of documents accepted as proof of address"
         ],
         "additional_documents": [
-          < return none if there are nothing else required, other fill it >
+          "None if nothing else is required, otherwise list additional documents"
         ]
       },
       "types_of_accounts": {
-        "checking_account": < yes if available >,
-        "savings_account": < yes if available >,
-        "money_market_account": "Combines features of both checking and savings accounts, typically offering higher interest rates."
+        "checking_account": "Yes if available, otherwise specify",
+        "savings_account": "Yes if available, otherwise specify",
+        "money_market_account": "Yes if available and combines features of both checking and savings accounts, typically offering higher interest rates."
       },
       "considerations": {
-        "fees": < give details about what the fees are >,
-        "interest_rates": < Rates offered on savings accounts and certificates of deposit >,
-        "minimum_balance_requirements": < Minimum amounts required to open and maintain accounts without incurring fees > ",
-        "online_and_mobile_banking_features": < Availability and features of online and mobile banking platforms >,
-        "customer_service": < Availability and quality of customer support channels (e.g., phone, email, in-person) >,
-        "additional_benefits": < Rewards programs, bonus offers for opening accounts, etc >
+        "fees": "Details about any applicable fees",
+        "interest_rates": "Rates offered on savings accounts and certificates of deposit",
+        "minimum_balance_requirements": "Minimum amounts required to open and maintain accounts without incurring fees",
+        "online_and_mobile_banking_features": "Availability and features of online and mobile banking platforms",
+        "customer_service": "Availability and quality of customer support channels (e.g., phone, email, in-person)",
+        "additional_benefits": "Rewards programs, bonus offers for opening accounts, etc."
       },
-      "promotions": < Details of any special promotions currently available.>
+      "promotions": "Details of any special promotions currently available."
     }
   ]
 }
 
-If you can not find the answer, return the below JSON instead. Remember, it is ok to return the above JSON with no doctors, this should only be used when you have tried everything and cannot determine this to be a medical issue. {
+If you cannot find the answer, return the below JSON. This should only be used when you have tried everything and cannot determine this to be a finance-related issue. {
   "error": "Unknown Request"
 }
 `;
 
-async function run() {
-    // For text-only input, use the gemini-pro model
+async function run(BANK_NAME, BANK_ADDRESS, CITIZENSHIP_STATUS,CURRENT_AGE,WORKING_STATUS) {
+
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-    
-    const result = await model.generateContent(searchPrompt);
+
+
+    // Assuming CITIZENSHIP_STATUS, CURRENT_AGE, and WORKING_STATUS are defined elsewhere in your code
+    const updatedSearchPrompt = searchPrompt
+      .replace('BANK_NAME', BANK_NAME)
+      .replace('BANK_ADDRESS',BANK_ADDRESS)
+      .replace('CITIZENSHIP_STATUS', CITIZENSHIP_STATUS)
+      .replace('CURRENT_AGE', CURRENT_AGE)
+      .replace('WORKING_STATUS', WORKING_STATUS);
+
+    const result = await model.generateContent(updatedSearchPrompt);
     const response = await result.response;
     const text = response.text();
     console.log(text);
 }
 
-run();
+run("Chase Bank", "174 Congress St. Troy, NY 12180", "US CITIZEN","20","COLLEGE STUDENT");
