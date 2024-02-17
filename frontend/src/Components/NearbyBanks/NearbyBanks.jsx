@@ -3,22 +3,24 @@ import './NearbyBanks.css'
 import {React, useState, useEffect} from 'react';
 import axios from 'axios';
 
-const NearbyBanks = () => {
+const NearbyBanks = ({ banks, setBanks }) => {
    // State to store bank data
-   const [banks, setBanks] = useState([]);
+  //  const [localBanks, setLocalBanks] = useState([]);
  
 
   const bankImages = {
     'wells fargo': "/banks/wellsfargo.png",
-    // 'chase': "/banks/chase.png",
+    'chase': "/banks/chase.png",
     'saratoga': "/banks/saratoga.png",
     'm&t': "/banks/mt.jpg",
     'trustco': "/banks/trustco.jpg",
-    // '': "/banks/",
-    // '': "/banks/",
-    // '': "/banks/",
-    // '': "/banks/",
-    // '': "/banks/"
+    'bank of america': "/banks/bankofamerica.jpg",
+    'pioneer': "/banks/pioneer.jpg",
+    'keybank': "/banks/keybank.png",
+    'broadview': "/banks/broadview.png",
+    'bravest': "/banks/bravest.png",
+    'troy community': "/banks/troyCommunity.png",
+    'sunmark': "/banks/sunmark.jpg",
   };
 
    // Function to fetch bank data
@@ -28,7 +30,8 @@ const NearbyBanks = () => {
         USER_ADDRESS: "12 Colvin Cir Troy, NY 12180"
        });
       //  console.log(response);
-       setBanks(response.data.banks); // Assuming the API response structure includes { banks: [...] }
+       setBanks(response.data.banks); 
+      //  setLocalBanks(response.data.banks)
      } catch (error) {
        console.error('Error fetching banks:', error);
        // Handle error appropriately
@@ -64,7 +67,8 @@ const NearbyBanks = () => {
                 <img src={getBankImage(bank.name)} alt="Bank Icon" className="branch-icon" />
                 <div className="branch-info">
                   <strong>{bank.name}</strong>
-                  <p>{bank.address}, {bank.distance} miles away</p>
+                  <p>{bank.distance} miles away</p>
+                  <p>{bank.address}</p>
                 </div>
               </div>
             ))}

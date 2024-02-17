@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Sidebar.css';
 import NearbyBanks from '../NearbyBanks/NearbyBanks';
 
-const Sidebar = ({ setSelectedOption }) => {
+const Sidebar = ({ setSelectedOption, banks, setBanks }) => {
   // State to track the selected menu item, defaulting to 'welcome'
   const [selectedItem, setSelectedItem] = useState('welcome');
 
@@ -35,7 +35,7 @@ const Sidebar = ({ setSelectedOption }) => {
           </button>
         </div>
 
-        <NearbyBanks />
+        <NearbyBanks banks={banks} setBanks={setBanks} />
       </div>
     </>
   );
