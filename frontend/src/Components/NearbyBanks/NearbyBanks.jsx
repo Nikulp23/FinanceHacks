@@ -1,33 +1,36 @@
 import './NearbyBanks.css'
-// import WF from'../../assets/banks/wellsfargo.png';
-// import {React, useState, useEffect} from 'react';
-// import axios from 'axios';
+import WF from'../../assets/banks/wellsfargo.png';
+import {React, useState, useEffect} from 'react';
+import axios from 'axios';
 
 const NearbyBanks = () => {
    // State to store bank data
-   // const [banks, setBanks] = useState([]);
+   const [banks, setBanks] = useState([]);
  
-   // // Function to fetch bank data
-   // const fetchBanks = async () => {
-   //   try {
-   //     const response = await axios.get('http://localhost:8080/getBanks');
-   //     setBanks(response.data.banks); // Assuming the API response structure includes { banks: [...] }
-   //   } catch (error) {
-   //     console.error('Error fetching banks:', error);
-   //     // Handle error appropriately
-   //   }
-   // };
+   // Function to fetch bank data
+   const fetchBanks = async () => {
+     try {
+       const response = await axios.post('http://localhost:8080/getBanks', {
+        USER_ADDRESS: "12 Colvin Cir Troy, NY 12180"
+       });
+       console.log(response);
+       setBanks(response.data.banks); // Assuming the API response structure includes { banks: [...] }
+     } catch (error) {
+       console.error('Error fetching banks:', error);
+       // Handle error appropriately
+     }
+   };
  
-   // // UseEffect to call fetchBanks on component mount
-   // useEffect(() => {
-   //   fetchBanks();
-   // }, []);
+   // UseEffect to call fetchBanks on component mount
+   useEffect(() => {
+     fetchBanks();
+   }, []);
 
   return (
     <>
       <div className="sidebar-bottom">
         <div className="find-branches">
-          {/* <h2>📍Find Branches/ATMs</h2>
+          <h2>📍Find Branches/ATMs</h2>
           <div className="branch-list">
             {banks.map((bank, index) => (
               <div key={index} className="branch">
@@ -38,7 +41,7 @@ const NearbyBanks = () => {
                 </div>
               </div>
             ))}
-          </div> */}
+          </div>
         </div>
       </div>
     </>
