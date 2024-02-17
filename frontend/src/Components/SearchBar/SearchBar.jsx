@@ -10,6 +10,12 @@ const SearchBar = ({ onSend }) => {
     setInputValue('');
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSendClick();
+    }
+  };
+
   return (
     <div className="search-bar">
       <input 
@@ -17,6 +23,7 @@ const SearchBar = ({ onSend }) => {
         placeholder="Type your message here..."
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={handleKeyPress}
       />
       <button type="button" onClick={handleSendClick}>Send</button>    </div>
   );

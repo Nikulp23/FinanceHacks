@@ -11,7 +11,7 @@ const Sidebar = () => {
         <div className="sidebar-header">
           {/* <img src={logo} alt="Bank Logo" className="sidebar-logo" /> */}
           <h1>Bank of the Future</h1>
-          <p>Trusted, AI-powered banking</p>
+          <p>Trusted, AI-powered Data</p>
         </div>
 
         <div className="sidebar-menu">

@@ -1,22 +1,64 @@
+/* Content.css */
+
 .content {
    width: 80%;
-   height: 100%;
+   height: calc(100% - 60px); 
    position: fixed;
    left: 20%;
    bottom: 0;
    display: flex;
    flex-direction: column;
-   justify-content: flex-end; /* Align children to the bottom */
-   padding: 10px; /* Add some padding */
-   box-sizing: border-box; /* Include padding in the width and height */
+   justify-content: flex-end; 
+   padding: 10px; 
+   box-sizing: border-box; 
 }
 
-user {
-   text-align: right;
-   /* Additional styling */
- }
- 
- .ai {
-   text-align: left;
-   /* Additional styling */
- }
+.conversation {
+   flex-grow: 1; 
+   padding: 10px; 
+   overflow-y: auto; 
+}
+
+.message {
+   max-width: 30%;
+   padding: 10px 20px;
+   border-radius: 20px; 
+   margin-bottom: 10px;
+   font-size: 14px; 
+   display: flex;
+   align-items: center;
+}
+
+.message.user {
+   background-color: rgb(26, 128, 229); 
+   color: white;
+   margin-left: auto; 
+   order: 1; 
+}
+
+.message.user .avatar {
+   background-image: url('../../assets/user.jpg');
+   margin-left: 10px;
+   order: 2; 
+}
+
+.message.ai {
+   background-color: rgb(232, 237, 242); 
+   color: black;
+   align-self: flex-start; 
+   display: flex;
+}
+
+.message.ai .avatar {
+   background-image: url('../../assets/ai.jpg'); 
+   margin-right: 10px; 
+   order: -1;
+}
+
+.avatar {
+   width: 40px; 
+   height: 40px; 
+   background-size: cover;
+   background-position: center;
+   border-radius: 50%; 
+}
