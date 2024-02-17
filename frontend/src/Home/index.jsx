@@ -1,12 +1,12 @@
 import './index.css'
-import NavBar from '../Components/Navbar/Navbar'
+// import NavBar from '../Components/Navbar/Navbar'
 import Sidebar from '../Components/Sidebar/Sidebar'
 import Content from '../Components/Content/Content'
 
 const Home = () => {
   return (
    <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Sidebar />  
       <Content />
    </>
