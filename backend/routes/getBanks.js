@@ -19,11 +19,11 @@ router.post(`/${parsed.name}`, async (req, res) => {
    const updatedPrompt = getBanksPrompt.replace('USER_ADDRESS', USER_ADDRESS);
 
    const result = await model.generateContent(updatedPrompt);
-   const response = await result.response;
+   const response = result.response;
    const text = response.text();
-   console.log(text);
 
-   res.send(text);
+   const jsonData = JSON.parse(text);
+   res.json(jsonData);
 });
 
 export default router;

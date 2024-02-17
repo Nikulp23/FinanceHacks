@@ -3,7 +3,7 @@ Finance Problem:
 
 Find all of the banks nearby
 
-Identify 10 banks that are the best
+Identify 2 banks that are the best
 
 Find banks in or near: { USER_ADDRESS } that match that specialty 
 
