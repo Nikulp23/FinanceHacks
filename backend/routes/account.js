@@ -11,12 +11,14 @@ import openAccountDetailsPrompt from '../prompts/openAccount.js';
 const genAI = new GoogleGenerativeAI("AIzaSyCp4kRI9XDs4rDs6AQusexuPbHemYC5CPk");
 
 router.post(`/${parsed.name}`, async (req, res) => {
+   
+   const BANK_NAME = "CHASE BANK";
+   const BANK_ADDRESS = "NANUET, NY, 10954";
 
-   const BANK_NAME = req.body.BANK_NAME;
-   const BANK_ADDRESS = req.body.BANK_ADDRESS;
-   const CITIZENSHIP_STATUS = req.body.CITIZENSHIP_STATUS;
-   const CURRENT_AGE = req.body.CURRENT_AGE;
-   const WORKING_STATUS = req.body.WORKING_STATUS;
+   const CITIZENSHIP_STATUS = req.body.choices[0];
+   const CURRENT_AGE = req.body.choices[1];
+
+   const WORKING_STATUS = "COLLEGE STUDENT";
 
    const updatedSearchPrompt = openAccountDetailsPrompt
       .replaceAll('BANK_NAME', BANK_NAME)
@@ -29,9 +31,9 @@ router.post(`/${parsed.name}`, async (req, res) => {
    const result = await model.generateContent(updatedSearchPrompt);
    const response = result.response;
    const text = response.text();
-   const jsonData = JSON.parse(text);
+   console.log(text);
 
-   res.json(jsonData);
+   res.send(text);
 });
 
 export default router;

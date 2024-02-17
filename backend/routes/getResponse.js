@@ -31,6 +31,8 @@ router.post(`/${parsed.name}`, async (req, res) => {
         // Generate a response based on the constructed prompt
         const result = await model.generateContent(prompt);
 
+        console.log(prompt);
+
         const aiResponse = result.response; // Assuming this is the AI response
         const text = aiResponse.text();
         res.send(text);
