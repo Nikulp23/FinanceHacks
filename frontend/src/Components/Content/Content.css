@@ -20,6 +20,9 @@
 }
 
 .message {
+   display: inline-block; /* or inline-block */
+   width: auto; /* Allows the bubble to grow with the content */
+   /* min-width: 10%; */
    max-width: 30%;
    padding: 10px 20px;
    border-radius: 20px; 
@@ -38,7 +41,7 @@
 
 .message.user .avatar {
    background-image: url('../../assets/user.jpg');
-   margin-left: 10px;
+   margin-left: auto;
    order: 2; 
 }
 
@@ -61,4 +64,5 @@
    background-size: cover;
    background-position: center;
    border-radius: 50%; 
+   flex-shrink: 0;
 }
