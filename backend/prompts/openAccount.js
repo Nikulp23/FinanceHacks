@@ -1,8 +1,4 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-const genAI = new GoogleGenerativeAI("AIzaSyCp4kRI9XDs4rDs6AQusexuPbHemYC5CPk");
-
-const searchPrompt = `
+const openAccountDetailsPrompt = `
 FINANCIAL HELP FOR OPENING A BANK ACCOUNT
 
 BANK : BANK_NAME
@@ -51,23 +47,4 @@ If you cannot find the answer, return the below JSON. This should only be used w
 }
 `;
 
-async function run(BANK_NAME, BANK_ADDRESS, CITIZENSHIP_STATUS,CURRENT_AGE,WORKING_STATUS) {
-
-    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-
-
-    // Assuming CITIZENSHIP_STATUS, CURRENT_AGE, and WORKING_STATUS are defined elsewhere in your code
-    const updatedSearchPrompt = searchPrompt
-      .replace('BANK_NAME', BANK_NAME)
-      .replace('BANK_ADDRESS',BANK_ADDRESS)
-      .replace('CITIZENSHIP_STATUS', CITIZENSHIP_STATUS)
-      .replace('CURRENT_AGE', CURRENT_AGE)
-      .replace('WORKING_STATUS', WORKING_STATUS);
-
-    const result = await model.generateContent(updatedSearchPrompt);
-    const response = await result.response;
-    const text = response.text();
-    console.log(text);
-}
-
-run("Chase Bank", "174 Congress St. Troy, NY 12180", "US CITIZEN","20","COLLEGE STUDENT");
+export default openAccountDetailsPrompt;
