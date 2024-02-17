@@ -66,7 +66,8 @@ const NearbyBanks = () => {
                 <img src={getBankImage(bank.name)} alt="Bank Icon" className="branch-icon" />
                 <div className="branch-info">
                   <strong>{bank.name}</strong>
-                  <p>{bank.address}, {bank.distance} miles away</p>
+                  <p>{bank.distance} miles away</p>
+                  <p>{bank.address}</p>
                 </div>
               </div>
             ))}
