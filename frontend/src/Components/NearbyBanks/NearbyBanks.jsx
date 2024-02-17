@@ -10,15 +10,17 @@ const NearbyBanks = () => {
 
   const bankImages = {
     'wells fargo': "/banks/wellsfargo.png",
-    // 'chase': "/banks/chase.png",
+    'chase': "/banks/chase.png",
     'saratoga': "/banks/saratoga.png",
     'm&t': "/banks/mt.jpg",
     'trustco': "/banks/trustco.jpg",
-    // '': "/banks/",
-    // '': "/banks/",
-    // '': "/banks/",
-    // '': "/banks/",
-    // '': "/banks/"
+    'bank of america': "/banks/bankofamerica.jpg",
+    'pioneer': "/banks/pioneer.jpg",
+    'keybank': "/banks/keybank.png",
+    'broadview': "/banks/broadview.png",
+    'bravest': "/banks/bravest.png",
+    'troy community': "/banks/troyCommunity.png",
+    'sunmark': "/banks/sunmark.jpg",
   };
 
    // Function to fetch bank data
