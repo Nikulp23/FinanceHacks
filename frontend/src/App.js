@@ -1,11 +1,14 @@
 
 import './App.css';
 import Home from './Home'
+import { SelectedItemProvider } from './SelectOption';
 
 function App() {
   return (
     <>
-      <Home />
+      <SelectedItemProvider>
+        <Home />
+      </SelectedItemProvider>
     </>
   );
 }
