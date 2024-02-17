@@ -26,12 +26,13 @@ const Content = () => {
         <div className="conversation">
           {conversation.map((message, index) => (
             <div key={index} className={`message ${message.sender}`}>
-              {message.text}
+              {/* The avatar div is always rendered, but its order will change based on the message sender */}
+              <div className="avatar" />
+              <span>{message.text}</span>
             </div>
           ))}
         </div>
         <SearchBar onSend={sendMessage} />
-        {/* <SearchBar /> */}
       </div>   
    </>
   )
