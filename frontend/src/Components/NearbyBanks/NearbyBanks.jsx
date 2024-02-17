@@ -1,6 +1,6 @@
 import './NearbyBanks.css'
 // import WF from'../../assets/banks/wellsfargo.png';
-import {React, useState, useEffect} from 'react';
+import {React, useEffect} from 'react';
 import axios from 'axios';
 
 const NearbyBanks = ({ banks, setBanks, selectedAddress}) => {
@@ -56,6 +56,7 @@ const NearbyBanks = ({ banks, setBanks, selectedAddress}) => {
     if (selectedAddress != null){
       fetchBanks();
     }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [selectedAddress]);
 
   return (
