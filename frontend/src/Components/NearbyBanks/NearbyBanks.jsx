@@ -3,9 +3,9 @@ import './NearbyBanks.css'
 import {React, useState, useEffect} from 'react';
 import axios from 'axios';
 
-const NearbyBanks = () => {
+const NearbyBanks = ({ banks, setBanks }) => {
    // State to store bank data
-   const [banks, setBanks] = useState([]);
+  //  const [localBanks, setLocalBanks] = useState([]);
  
 
   const bankImages = {
@@ -30,7 +30,8 @@ const NearbyBanks = () => {
         USER_ADDRESS: "12 Colvin Cir Troy, NY 12180"
        });
       //  console.log(response);
-       setBanks(response.data.banks); // Assuming the API response structure includes { banks: [...] }
+       setBanks(response.data.banks); 
+      //  setLocalBanks(response.data.banks)
      } catch (error) {
        console.error('Error fetching banks:', error);
        // Handle error appropriately

@@ -7,12 +7,14 @@ import Content from '../Components/Content/Content'
 
 const Home = () => {
   const [selectedOption, setSelectedOption] = useState('welcome');
+  const [banks, setBanks] = useState([]);
+
 
   return (
    <>
       {/* <NavBar /> */}
-      <Sidebar setSelectedOption={setSelectedOption}/>  
-      <Content selectedOption={selectedOption}/>
+      <Sidebar setSelectedOption={setSelectedOption} banks={banks} setBanks={setBanks} />  
+      <Content selectedOption={selectedOption} banks={banks}/>
    </>
   )
 }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Content.css';
 import SearchBar from '../SearchBar/SearchBar';
 
-const Content = ({ selectedOption }) => {
+const Content = ({ selectedOption, banks }) => {
   const initialMessages = {
     welcome: "Welcome to Bank of the Future! How can I assist you today?",
     openAccount: "Interested in opening an account? What type of account would you like?",
@@ -18,6 +18,7 @@ const Content = ({ selectedOption }) => {
   }, [selectedOption]);
   
   const sendMessage = async (userMessage) => {
+    console.log(banks)
     const updatedConversation = [...conversation, { text: userMessage, sender: 'user' }];
     setConversation(updatedConversation);
 
