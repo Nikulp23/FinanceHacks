@@ -46,7 +46,8 @@ async function fetchDistance(startCoords, endCoords) {
 
   const distance = await response.json();
   
-  const dist = distance.resourceSets[0].resources[0].results[0].travelDistance;
+  let dist = distance.resourceSets[0].resources[0].results[0].travelDistance;
+  dist = Math.round(dist * 100) / 100
   const time = distance.resourceSets[0].resources[0].results[0].travelDuration;
   return [dist, time];
   
