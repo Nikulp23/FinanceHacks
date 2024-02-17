@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Content.css'
 import SearchBar from '../SearchBar/SearchBar'
@@ -13,12 +13,14 @@ const Content = () => {
     try {
       const response = await axios.post('http://localhost:8080/getResponse', { conversation: updatedConversation });
       
-      setConversation(prevConvo => [...prevConvo, { text: response.data, sender: 'ai' }]);
-      console.log(conversation)
+      setConversation(prevConvo => [...prevConvo, { text: response.data, sender: 'AI' }]);
     } catch (error) {
       console.error('API call failed:', error);
     }
   };
+
+  useEffect(() => {
+  }, [conversation]);
 
   return (
    <>

@@ -24,6 +24,7 @@ router.post(`/${parsed.name}`, async (req, res) => {
 
    console.log(updatedPrompt);
    const jsonData = JSON.parse(text);
+   
    res.json(jsonData);
 });
 
