@@ -33,6 +33,3 @@ If you cannot find the answer, return the below JSON instead. Remember, this sho
 `;
 
 export default loanInfoPrompt;
-
-
-export default loanInfoPrompt;
