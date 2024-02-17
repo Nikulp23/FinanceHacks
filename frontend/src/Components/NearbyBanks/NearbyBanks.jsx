@@ -3,7 +3,7 @@ import './NearbyBanks.css'
 import {React, useState, useEffect} from 'react';
 import axios from 'axios';
 
-const NearbyBanks = ({ banks, setBanks }) => {
+const NearbyBanks = ({ banks, setBanks, selectedAddress}) => {
    // State to store bank data
   //  const [localBanks, setLocalBanks] = useState([]);
  

@@ -36,7 +36,7 @@ const Sidebar = ({ setSelectedOption, banks, setBanks, selectedAddress }) => {
           </button>
         </div>
 
-        <NearbyBanks banks={banks} setBanks={setBanks} />
+        <NearbyBanks banks={banks} setBanks={setBanks} selectedAddress = { selectedAddress }/>
       </div>
     </>
   );
