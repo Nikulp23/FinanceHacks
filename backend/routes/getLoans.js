@@ -7,29 +7,30 @@ const __filename = fileURLToPath(import.meta.url);
 const parsed = path.parse(__filename);
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import getBanksPrompt from '../prompts/getBanks.js';
+import loanInfoPrompt from '../prompts/loanInfo.js';
 
 const genAI = new GoogleGenerativeAI("AIzaSyCp4kRI9XDs4rDs6AQusexuPbHemYC5CPk");
 
 router.post(`/${parsed.name}`, async (req, res) => {  
    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 
-   const USER_ADDRESS = req.body.USER_ADDRESS;
+   const BANK_NAME = req.body.BANK_NAME;
+   const LOAN_TYPE = req.body.LOAN_TYPE;
+   const LOAN_AMOUNT = req.body.LOAN_AMOUNT;
+   const CREDIT_SCORE = req.body.CREDIT_SCORE;
 
-   const updatedPrompt = getBanksPrompt.replaceAll('USER_ADDRESS', USER_ADDRESS);
+   const updatedSearchPrompt = loanInfoPrompt
+      .replaceAll('BANK_NAME', BANK_NAME)
+      .replaceAll('LOAN_TYPE',LOAN_TYPE)
+      .replaceAll('LOAN_AMOUNT', LOAN_AMOUNT)
+      .replaceAll('CREDIT_SCORE', CREDIT_SCORE)
 
-   const result = await model.generateContent(updatedPrompt);
+   const result = await model.generateContent(updatedSearchPrompt);
    const response = result.response;
    const text = response.text();
 
-   console.log(updatedPrompt);
    const jsonData = JSON.parse(text);
    res.json(jsonData);
 });
 
 export default router;
-
-
-// {
-//    "USER_ADDRESS": "60 Timberline Drive, Nanuet, NY"
-//  }
