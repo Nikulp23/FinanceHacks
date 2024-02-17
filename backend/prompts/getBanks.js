@@ -1,9 +1,7 @@
 const getBanksPrompt = `
 Finance Problem:
 
-Find all of the banks nearby
-
-Identify 2 banks that are the best
+FIND ALL the banks that are the NEAREST AND BEST near USER_ADDRESS
 
 Find banks in or near: { USER_ADDRESS } that match that specialty 
 
@@ -18,7 +16,7 @@ Please do not respond with any symbols, only plaintext. Fill in this JSON (docto
    ]
 }
 
-If you can not find the answer, return the below JSON instead. Remember, it is ok to return the above JSON with no doctors, this should only be used when you have tried everything and cannot determine this to be a medical issue. {
+If you can not find the answer, return the below JSON instead. Remember, it is ok to return the above JSON with no banks, this should only be used when you have tried everything and cannot find a bank near you. {
   "error": "Unknown Request"
 }
 `;
