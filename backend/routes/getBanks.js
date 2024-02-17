@@ -11,15 +11,19 @@ import getBanksPrompt from '../prompts/getBanks.js';
 
 const genAI = new GoogleGenerativeAI("AIzaSyCp4kRI9XDs4rDs6AQusexuPbHemYC5CPk");
 
-router.get(`/${parsed.name}`, async (req, res) => {  
+router.post(`/${parsed.name}`, async (req, res) => {  
    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 
-   const result = await model.generateContent("what is your name");
+   const USER_ADDRESS = req.body.USER_ADDRESS;
+
+   const updatedPrompt = getBanksPrompt.replace('USER_ADDRESS', USER_ADDRESS);
+
+   const result = await model.generateContent(updatedPrompt);
    const response = await result.response;
    const text = response.text();
    console.log(text);
 
-   res.json({ canConnect: true });
+   res.send(text);
 });
 
 export default router;
