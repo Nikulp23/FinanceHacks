@@ -20,9 +20,7 @@
 }
 
 .message {
-   display: inline-block; /* or inline-block */
-   width: auto; /* Allows the bubble to grow with the content */
-   /* min-width: 10%; */
+   width: auto; 
    max-width: 30%;
    padding: 10px 20px;
    border-radius: 20px; 

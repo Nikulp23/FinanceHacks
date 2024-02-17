@@ -1,5 +1,5 @@
 import './NearbyBanks.css'
-import WF from'../../assets/banks/wellsfargo.png';
+// import WF from'../../assets/banks/wellsfargo.png';
 import {React, useState, useEffect} from 'react';
 import axios from 'axios';
 
@@ -7,6 +7,20 @@ const NearbyBanks = () => {
    // State to store bank data
    const [banks, setBanks] = useState([]);
  
+
+  const bankImages = {
+    'wells fargo': "/banks/wellsfargo.png",
+    // 'chase': "/banks/chase.png",
+    'saratoga': "/banks/saratoga.png",
+    'm&t': "/banks/mt.jpg",
+    'trustco': "/banks/trustco.jpg",
+    '': "/banks/",
+    '': "/banks/",
+    '': "/banks/",
+    '': "/banks/",
+    '': "/banks/"
+  };
+
    // Function to fetch bank data
    const fetchBanks = async () => {
      try {
@@ -20,6 +34,19 @@ const NearbyBanks = () => {
        // Handle error appropriately
      }
    };
+
+  const getBankImage = (bankName) => {
+    const normalizedBankName = bankName.toLowerCase();
+  
+    // Loop through the bankImages keys to find a matching bank
+    for (const [key, value] of Object.entries(bankImages)) {
+      if (normalizedBankName.includes(key)) {
+        return value; // Return the image path if a match is found
+      }
+    }
+  
+    return "/banks/default.png"; // Return a default image path if no match is found
+  };
  
    // UseEffect to call fetchBanks on component mount
    useEffect(() => {
@@ -34,7 +61,7 @@ const NearbyBanks = () => {
           <div className="branch-list">
             {banks.map((bank, index) => (
               <div key={index} className="branch">
-                <img src={WF} alt="Bank Icon" className="branch-icon" />
+                <img src={getBankImage(bank.name)} alt="Bank Icon" className="branch-icon" />
                 <div className="branch-info">
                   <strong>{bank.name}</strong>
                   <p>{bank.address}, {bank.distance} miles away</p>
