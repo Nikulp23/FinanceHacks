@@ -12,3 +12,6 @@ If you can not find the answer, return the below JSON instead. Remember, it is o
   "error": "Unknown Request"
 }
 `;
+
+
+export default loanInfoPrompt;
