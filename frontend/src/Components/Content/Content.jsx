@@ -3,7 +3,9 @@ import axios from 'axios';
 import './Content.css';
 import SearchBar from '../SearchBar/SearchBar';
 
-const Content = () => {
+import JsonFormat from '../JsonFormats/JsonFormat.jsx'
+
+const Content = ({selectedOption}) => {
   const [conversation, setConversation] = useState([]);
   const [step, setStep] = useState(0);
   const [userChoices, setUserChoices] = useState([]); // New state to track user choices
@@ -79,9 +81,9 @@ const Content = () => {
 
     // Add the response from the backend as a new AI message to the conversation
     addMessageToConversation({
-      text: response.data, // Use the response data directly since it's a simple text message
+      text: response.data,
       sender: 'ai',
-      type: 'text'
+      type: 'json'
     });
   } catch (error) {
     console.error('API call failed:', error);
@@ -96,6 +98,8 @@ const Content = () => {
             <div className="avatar" />
             {message.type === 'text' ? (
               <span>{message.text}</span>
+            ) : message.type === 'json' ? (
+              <JsonFormat data={message.text} selectedOption={selectedOption} />
             ) : (
               <div className="button-options">
                 {message.options.map((option, idx) => (
