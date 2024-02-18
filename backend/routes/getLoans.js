@@ -30,10 +30,7 @@ router.post(`/${parsed.name}`, async (req, res) => {
    const text = response.text();
 
    console.log(text);
-   // const jsonData = JSON.parse(text);
-   // res.json(jsonData);
-
-   res.send(updatedSearchPrompt);
+   res.send(text);
 });
 
 export default router;

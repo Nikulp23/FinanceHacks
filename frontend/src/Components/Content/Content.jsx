@@ -3,6 +3,8 @@ import axios from 'axios';
 import './Content.css';
 import SearchBar from '../SearchBar/SearchBar';
 
+import JsonFormat from '../JsonFormats/JsonFormat.jsx'
+
 const Content = ({selectedOption}) => {
 
   const [conversation, setConversation] = useState([]);
@@ -145,7 +147,7 @@ const getLoanInformation = async (choices) => {
     addMessageToConversation({
       text: response.data,
       sender: 'ai',
-      type: 'text'
+      type: 'json'
     });
   } catch (error) {
     console.error('API call failed:', error);
@@ -160,7 +162,7 @@ const getAccountInformation = async (choices) => {
     addMessageToConversation({
       text: response.data,
       sender: 'ai',
-      type: 'text'
+      type: 'json'
     });
   } catch (error) {
     console.error('API call failed:', error);
@@ -175,6 +177,8 @@ const getAccountInformation = async (choices) => {
             <div className="avatar" />
             {message.type === 'text' ? (
               <span>{message.text}</span>
+            ) : message.type === 'json' ? (
+              <JsonFormat data={message.text} selectedOption={selectedOption} />
             ) : (
               <div className="button-options">
                 {message.options.map((option, idx) => (

@@ -1,11 +1,13 @@
 const loanInfoPrompt = `
 Finance Problem:
 
-For a given bank, find and output all loan information.
+OUTPUT LOAN INFORMATION - BANK NAME
 
-The bank will be given using BANK_NAME.
+TYPE OF LOAN - LOAN_TYPE
 
-This person needs a LOAN_TYPE loan, intends to borrow an amount of LOAN_AMOUNT, and has a credit score of CREDIT_SCORE.
+INTENDS TO BORROW - LOAN AMOUNT
+
+HAS A CREDIT SCORE - CREDIT_SCORE.
 
 Please respond with plaintext only. Fill in this JSON as your response, and respond with only the filled-out JSON form below. Nothing else.
 
