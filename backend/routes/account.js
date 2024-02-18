@@ -28,9 +28,9 @@ async function generateBankDetails(bank, CITIZENSHIP_STATUS, CURRENT_AGE, WORKIN
       // Return a promise that resolves with the generated content
       const model = genAI.getGenerativeModel({ model: "gemini-pro", generationConfig});
       return model.generateContent(updatedSearchPrompt).then(result => {
-      const response = result.response;
-      return response.text(); 
-   });
+         const response = result.response;
+         return response.text(); 
+      });
  }
 
 router.post(`/${parsed.name}`, async (req, res) => {

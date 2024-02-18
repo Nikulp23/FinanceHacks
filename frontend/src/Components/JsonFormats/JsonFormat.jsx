@@ -13,8 +13,8 @@ const JsonFormat = ({ data, selectedOption }) => {
    else if (data.error !== undefined) {
     const message = data.reason !== undefined ? data.reason : "Unable to access backend data.";
     return <div>{message}</div>;   
-  }
-   else if (selectedOption === 'openAccount' && data.banks !== undefined) {
+   }
+   else if (selectedOption === 'openAccount') {
      return <OpenAccountFormat banks={data.banks} />;
    } 
    else if (selectedOption === 'applyLoan') {
@@ -24,7 +24,7 @@ const JsonFormat = ({ data, selectedOption }) => {
     return <CreditFormat cards={data.cards} />;
    }
    else {
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+    return <pre>{JSON.stringify(data, null, 2)}</pre>;
    }
  };
  
