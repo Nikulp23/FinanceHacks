@@ -20,7 +20,7 @@ const Sidebar = ({ setSelectedOption, banks, setBanks, selectedAddress }) => {
       <div className="sidebar">
         <div className="sidebar-header">
           {/* <img src={logo} sidebar-log alt="logo" className='sidebar-logo'/> */}
-          <h1>Finance For All</h1>
+          <h1>BankForAll</h1>
           <p>Trusted, AI-powered Data</p>
         </div>
 
