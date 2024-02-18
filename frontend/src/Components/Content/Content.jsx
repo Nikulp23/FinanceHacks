@@ -8,7 +8,7 @@ import { leapfrog } from 'ldrs'
 
 leapfrog.register();
 
-const Content = ({selectedOption}) => {
+const Content = ({selectedOption, banks}) => {
 
   const axiosCancelSource = useRef(null);
 
@@ -292,7 +292,7 @@ const getAccountInformation = async (choices) => {
   axiosCancelSource.current = axios.CancelToken.source();
 
   try {
-    const response = await axios.post('http://localhost:8080/account', { choices }, {
+    const response = await axios.post('http://localhost:8080/account', { choices, banks }, {
       cancelToken: axiosCancelSource.current.token // Use the cancel token in the request
     });
 
