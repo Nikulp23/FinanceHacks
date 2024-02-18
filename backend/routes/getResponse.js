@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const parsed = path.parse(__filename);
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
-const genAI = new GoogleGenerativeAI("AIzaSyCp4kRI9XDs4rDs6AQusexuPbHemYC5CPk");
+const genAI = new GoogleGenerativeAI("");
 
 router.post(`/${parsed.name}`, async (req, res) => {
 

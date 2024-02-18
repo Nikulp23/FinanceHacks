@@ -7,7 +7,7 @@ const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const parsed = path.parse(__filename);
 
-const apiKey = "Ag46A1RC8faoCPh9La1fZF7uxL6IAmQETCrErkWSqvBNWyH_BUkZC2nI2F2JIKEW";
+const apiKey = "";
 
 // Returns an array of size 2 with the latitute and longtitude of the given address
 async function fetchCoordinates(address) {
@@ -59,7 +59,7 @@ async function fetchNearbyBanks(userLocation) {
   try {
     // console.log("Fetching nearby bank");
     response = await fetch(`https://dev.virtualearth.net/REST/v1/LocalSearch/?query=banks&userLocation=${userLocation[0]}
-    ,${userLocation[1]}&maxResults=10&key=Ag46A1RC8faoCPh9La1fZF7uxL6IAmQETCrErkWSqvBNWyH_BUkZC2nI2F2JIKEW`);
+    ,${userLocation[1]}&maxResults=10&key=${apiKey}`);
   } catch(e) {
     console.log("Error: ", e);
   }

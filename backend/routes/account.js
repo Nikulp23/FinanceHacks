@@ -8,7 +8,7 @@ const parsed = path.parse(__filename);
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import openAccountDetailsPrompt from '../prompts/openAccount.js';
-const genAI = new GoogleGenerativeAI("AIzaSyCp4kRI9XDs4rDs6AQusexuPbHemYC5CPk");
+const genAI = new GoogleGenerativeAI("");
 const generationConfig = {
    temperature: 0,
 };
