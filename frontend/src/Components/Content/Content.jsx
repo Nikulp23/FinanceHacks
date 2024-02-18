@@ -232,6 +232,7 @@ const Content = ({selectedOption}) => {
 
 // CREDIT CARD INFORMATION
 const getCreditInformation = async (choices) => {
+  setLoading(true);
   if (axiosCancelSource.current) {
     axiosCancelSource.current.cancel("Cancelling previous request.");
   }
@@ -252,6 +253,7 @@ const getCreditInformation = async (choices) => {
       console.error('API call failed:', error);
     }
   }
+  setLoading(false);
 }
 
 const getLoanInformation = async (choices) => {
