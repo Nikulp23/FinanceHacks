@@ -16,13 +16,13 @@ const Content = ({selectedOption, banks}) => {
   const [step, setStep] = useState(0);
   const [userChoices, setUserChoices] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const [hasSentMessage, setHasSentMessage] = useState(false);
 
+  // Handle cleanup and state reset when the component unmounts or selectedOption changes
   useEffect(() => {
     if (selectedOption !== 'general') {
       setHasSentMessage(false);
-    } 
+    }
 
     return () => {
       if (axiosCancelSource.current) {
@@ -31,8 +31,12 @@ const Content = ({selectedOption, banks}) => {
     };
   }, [selectedOption]);
 
+  // Handle initializing or clearing the conversation based on selectedOption
   useEffect(() => {
     setLoading(false);
+    setConversation([]); // Always reset conversation when option changes
+    setUserChoices([]);
+    setStep(0);
 
     // Reset the conversation when the selected option changes
     if (selectedOption === 'openAccount') {
