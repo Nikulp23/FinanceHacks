@@ -141,3 +141,40 @@
    margin-right: 0;
  }
  
+
+ .welcome-message {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100%; /* Use available height */
+   text-align: center; /* Center text horizontally */
+ }
+ 
+ .welcome-message h2 {
+   font-size: 40px; /* Larger font size for main welcome text */
+   color: #1A80E5; /* Example color, adjust as needed */
+   margin-bottom: 20px; /* Spacing between the welcome text and description */
+ }
+ 
+ .welcome-message p {
+   font-size: 24px; /* Larger than default text size for description */
+   color: #4A4A4A; /* Example color, adjust as needed */
+ }
+ 
+ /* Ensure the .content styling allows for the welcome message to be centered */
+ .content {
+   display: flex;
+   flex-direction: column;
+   justify-content: center; /* This ensures the content is centered vertically */
+   align-items: center; /* This ensures the content is centered horizontally */
+   height: 100vh; /* Adjust as needed, ensure it's enough to center content */
+   /* Other styles remain unchanged */
+ }
+ 
+ /* Additional adjustments to ensure proper layout */
+ .conversation {
+   width: 100%; /* Ensure conversation takes full width when displayed */
+   /* Other styles remain unchanged */
+ }
+ 

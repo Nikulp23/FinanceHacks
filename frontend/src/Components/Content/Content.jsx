@@ -13,6 +13,20 @@ const Content = ({selectedOption}) => {
   const [step, setStep] = useState(0);
   const [userChoices, setUserChoices] = useState([]);
 
+  const [hasSentMessage, setHasSentMessage] = useState(false);
+
+  useEffect(() => {
+    if (selectedOption !== 'general') {
+      setHasSentMessage(false);
+    } 
+
+    return () => {
+      if (axiosCancelSource.current) {
+        axiosCancelSource.current.cancel("Component unmounted: Request canceled.");
+      }
+    };
+  }, [selectedOption]);
+
   useEffect(() => {
     // Reset the conversation when the selected option changes
     if (selectedOption === 'openAccount') {
@@ -183,6 +197,7 @@ const Content = ({selectedOption}) => {
 
  // CHAT FEATURES - WORKS FOR ALL PART
  const sendMessage = async (userMessage) => {
+  setHasSentMessage(true);
   // Update the conversation state immediately with user message
   const updatedConversation = [...conversation, { text: userMessage, sender: 'user', type: 'text' }];
   setConversation(updatedConversation);
@@ -281,6 +296,12 @@ const getAccountInformation = async (choices) => {
 
   return (
     <div className="content">
+      {selectedOption === 'general' && !hasSentMessage && (
+        <div className="welcome-message">
+          <h2>Welcome!</h2>
+          <p>Please send us a message to get started.</p>
+        </div>
+      )}
       <div className="conversation">
         {conversation.map((message, index) => (
           <div key={index} className={`message ${message.sender}`}>
