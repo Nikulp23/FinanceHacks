@@ -25,7 +25,7 @@ const Content = ({selectedOption}) => {
         text: "What is your citizenship status?",
         sender: 'ai',
         type: 'buttons',
-        options: [{ label: "US", value: "US Citizenship" }, { label: "NON US", value: "Non-US Citizenship" }]
+        options: [{ label: "US CITIZEN", value: "US Citizenship" }, { label: "NON US CITIZEN", value: "Non-US Citizenship" }]
       }]);
       setUserChoices([]);
       setStep(0);
@@ -41,7 +41,7 @@ const Content = ({selectedOption}) => {
         text: "What type of Loan do you want?",
         sender: 'ai',
         type: 'buttons',
-        options: [{ label: "Student Loan", value: "Students Loan" }, { label: "Personal Loan", value: "Personal Loan" }]
+        options: [{ label: "STUDENT LOAN", value: "Students Loan" }, { label: "PERSONAL LOAN", value: "Personal Loan" }]
       }]);
       setUserChoices([]);
       setStep(0);
@@ -57,7 +57,7 @@ const Content = ({selectedOption}) => {
         text: "What type of card do you want?",
         sender: 'ai',
         type: 'buttons',
-        options: [{ label: "Student Card", value: "Student Card" }, { label: "Business Card", value: "Business Card" }, {label: "Travel Card", value: "Travel Card"}]
+        options: [{ label: "STUDENT CARD", value: "Student Card" }, { label: "BUSINESS CARD", value: "Business Card" }, {label: "TRAVEL CARD", value: "Travel Card"},{label: "REWARDS CARD", value: "Rewards Card"}]
       }]);
       setUserChoices([]);
       setStep(0);
@@ -101,7 +101,7 @@ const Content = ({selectedOption}) => {
             text: "What is your age?",
             sender: 'ai',
             type: 'buttons',
-            options: [{ label: "20+", value: "20+" }, { label: "60+", value: "60+" }]
+            options: [{ label: "Below 20 Years", value: "Below 20 Years" }, { label: "20 - 40 Years", value: "20 - 40 Years" }, { label: "60+ Years", value: "60+ Years" }]
           });
           break;
         case 1:
@@ -292,7 +292,7 @@ const getAccountInformation = async (choices) => {
             ) : (
               <div className="button-options">
                 {message.options.map((option, idx) => (
-                  <button key={idx} onClick={() => handleButtonClick(option.value)}>
+                  <button className='button-4' key={idx} onClick={() => handleButtonClick(option.value)}>
                     {option.label}
                   </button>
                 ))}
