@@ -32,14 +32,14 @@ const Content = ({selectedOption}) => {
     if (selectedOption === 'openAccount') {
       // Initialize with the first message for 'openAccount'
       setConversation([{
-        text: "Welcome, we are here to help you to Opening an account. Before we proceed you will need to answer some questions.",
+        text: "Welcome! We're here to assist you with opening an account. Before we proceed, we'll need you to answer a few questions.",
         sender: 'ai',
         type: 'text'
       }, {
         text: "What is your citizenship status?",
         sender: 'ai',
         type: 'buttons',
-        options: [{ label: "US CITIZEN", value: "US Citizenship" }, { label: "NON US CITIZEN", value: "Non-US Citizenship" }]
+        options: [{ label: "US CITIZEN", value: "US CITIZEN" }, { label: "NON US CITIZEN", value: "NON US CITIZEN" }]
       }]);
       setUserChoices([]);
       setStep(0);
@@ -48,14 +48,14 @@ const Content = ({selectedOption}) => {
 
       // Initialize with the first message for 'openAccount'
       setConversation([{
-        text: "Welcome, we are here to help you to Apply Loan. Before we proceed you will need to answer some questions.",
+        text: "Welcome! We're here to guide you through the loan application process. Before we can proceed, we'll need you to answer some questions.",
         sender: 'ai',
         type: 'text'
       }, {
         text: "What type of Loan do you want?",
         sender: 'ai',
         type: 'buttons',
-        options: [{ label: "STUDENT LOAN", value: "Students Loan" }, { label: "PERSONAL LOAN", value: "Personal Loan" }]
+        options: [{ label: "STUDENT LOAN", value: "STUDENT LOAN" }, { label: "PERSONAL LOAN", value: "PERSONAL LOAN" }]
       }]);
       setUserChoices([]);
       setStep(0);
@@ -64,14 +64,14 @@ const Content = ({selectedOption}) => {
 
       // Initialize with the first message for 'openAccount'
       setConversation([{
-        text: "Welcome, we are here to help you to help you with Credit Card. Before we proceed you will need to answer some questions.",
+        text: "Welcome! We're here to assist you with your credit card needs. Before we proceed, please answer a few questions to help us serve you better.",
         sender: 'ai',
         type: 'text'
       }, {
         text: "What type of card do you want?",
         sender: 'ai',
         type: 'buttons',
-        options: [{ label: "STUDENT CARD", value: "Student Card" }, { label: "BUSINESS CARD", value: "Business Card" }, {label: "TRAVEL CARD", value: "Travel Card"},{label: "REWARDS CARD", value: "Rewards Card"}]
+        options: [{ label: "STUDENT CARD", value: "STUDENT CARD" }, { label: "BUSINESS CARD", value: "BUSINESS CARD" }, {label: "TRAVEL CARD", value: "TRAVEL CARD"},{label: "REWARDS CARD", value: "REWARDS CARD"}]
       }]);
       setUserChoices([]);
       setStep(0);
@@ -115,7 +115,7 @@ const Content = ({selectedOption}) => {
             text: "What is your age?",
             sender: 'ai',
             type: 'buttons',
-            options: [{ label: "Below 20 Years", value: "Below 20 Years" }, { label: "20 - 40 Years", value: "20 - 40 Years" }, { label: "60+ Years", value: "60+ Years" }]
+            options: [{ label: "AGE: BELOW 20 YEARS", value: "BELOW 20 YEARS" }, { label: "AGE: 20 - 40 Years", value: "20 - 40 YEARS" }, { label: "Age: 40+ YEARS", value: "40+ YEARS" }]
           });
           break;
         case 1:
@@ -147,7 +147,7 @@ const Content = ({selectedOption}) => {
             text: "What is your approximate credit score?",
             sender: 'ai',
             type: 'buttons',
-            options: [{ label: "750+", value: "750+" }, { label: "600+", value: "600+" }]
+            options: [{ label: "CREDIT SCORE: BELOW 650", value: "CREDIT SCORE: BELOW 650" }, { label: "CREDIT SCORE: ABOVE 650", value: "CREDIT SCORE ABOVE 650+ "}]
           });
           break;
         case 1:
