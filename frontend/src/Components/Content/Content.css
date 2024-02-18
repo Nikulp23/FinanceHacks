@@ -65,6 +65,9 @@
    flex-shrink: 0;
 }
 
+.loading {
+   margin-left: 20px;
+}
 
 .button-4 {
   appearance: none;
@@ -177,4 +180,3 @@
    width: 100%; /* Ensure conversation takes full width when displayed */
    /* Other styles remain unchanged */
  }
- 

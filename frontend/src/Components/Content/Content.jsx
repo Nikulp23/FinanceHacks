@@ -4,6 +4,9 @@ import './Content.css';
 import SearchBar from '../SearchBar/SearchBar';
 
 import JsonFormat from '../JsonFormats/JsonFormat.jsx'
+import { leapfrog } from 'ldrs'
+
+leapfrog.register();
 
 const Content = ({selectedOption, banks}) => {
 
@@ -12,6 +15,7 @@ const Content = ({selectedOption, banks}) => {
   const [conversation, setConversation] = useState([]);
   const [step, setStep] = useState(0);
   const [userChoices, setUserChoices] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const [hasSentMessage, setHasSentMessage] = useState(false);
 
@@ -28,6 +32,8 @@ const Content = ({selectedOption, banks}) => {
   }, [selectedOption]);
 
   useEffect(() => {
+    setLoading(false);
+
     // Reset the conversation when the selected option changes
     if (selectedOption === 'openAccount') {
       // Initialize with the first message for 'openAccount'
@@ -98,7 +104,7 @@ const Content = ({selectedOption, banks}) => {
 
   // THIS CODE SAVES THE USERS BUTTON SELECTION
   const handleButtonClick = (userChoice) => {
-   
+    
     // Only proceed if 'openAccount' is selected
     if (selectedOption === 'openAccount') {
       const updatedChoices = [...userChoices, userChoice];
@@ -197,6 +203,7 @@ const Content = ({selectedOption, banks}) => {
 
  // CHAT FEATURES - WORKS FOR ALL PART
  const sendMessage = async (userMessage) => {
+  setLoading(true);
   setHasSentMessage(true);
   // Update the conversation state immediately with user message
   const updatedConversation = [...conversation, { text: userMessage, sender: 'user', type: 'text' }];
@@ -219,10 +226,13 @@ const Content = ({selectedOption, banks}) => {
       console.error('API call failed:', error);
     }
   }
+
+  setLoading(false);
 };
 
 // CREDIT CARD INFORMATION
 const getCreditInformation = async (choices) => {
+  setLoading(true);
   if (axiosCancelSource.current) {
     axiosCancelSource.current.cancel("Cancelling previous request.");
   }
@@ -243,9 +253,11 @@ const getCreditInformation = async (choices) => {
       console.error('API call failed:', error);
     }
   }
+  setLoading(false);
 }
 
 const getLoanInformation = async (choices) => {
+  setLoading(true);
   if (axiosCancelSource.current) {
     axiosCancelSource.current.cancel("Cancelling previous request.");
   }
@@ -266,10 +278,12 @@ const getLoanInformation = async (choices) => {
       console.error('API call failed:', error);
     }
   }
+  setLoading(false);
 };
 
 // Define the function to make the API call
 const getAccountInformation = async (choices) => {
+  setLoading(true);
   // Cancel any ongoing request
   if (axiosCancelSource.current) {
     axiosCancelSource.current.cancel("Cancelling previous request.");
@@ -292,6 +306,8 @@ const getAccountInformation = async (choices) => {
       console.error('API call failed:', error);
     }
   }
+
+  setLoading(false);
 };
 
   return (
@@ -321,6 +337,13 @@ const getAccountInformation = async (choices) => {
             )}
           </div>
         ))}
+        {loading && 
+          <l-leapfrog
+            size="46"
+            speed="2.5" 
+            color="black" 
+            className="loading"
+          ></l-leapfrog>}
       </div>
       <SearchBar onSend={sendMessage} />
     </div>
