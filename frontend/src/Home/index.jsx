@@ -19,7 +19,6 @@ const Home = () => {
       
         setSelectedAddress([latitude,longitude]);
 
-        console.log("HOME: ", selectedAddress)
       });
     }
     else {
