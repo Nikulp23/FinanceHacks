@@ -1,6 +1,18 @@
 # FinanceHacks
 
-This application is a versatile financial tool aimed at enhancing financial literacy and decision-making. It supports users with practical guidance on how to open an account, apply for loans, secure credit cards, and more. Additionally, we champion local banks by increasing their visibility within the community, helping users discover and benefit from the diverse services these local institutions offer. It also features an AI chatbot capable of answering all your financial queries, ensuring users have 24/7 support for their financial needs.
+## Overview
+FinanceHacks is a versatile financial tool designed to enhance financial literacy and decision-making. It offers practical guidance on account opening, loan applications, securing credit cards, and more, with a focus on promoting local banks and their services.
+
+## Features
+- **Comprehensive Financial Guidance**: Step-by-step instructions on various financial operations and comparisons of banks accounts, loans and credit cards.
+- **Local Bank Discovery**: Features designed to increase the visibility and accessibility of local banks.
+- **24/7 AI Chatbot**: An intelligent assistant ready to answer all your financial queries.
+
+## Video Demonstration
+Check out our [video demonstration](https://youtu.be/m4LJseExFwY) to see FinanceHacks in action. 
+
+## Hackathon Achievement
+We're proud to announce that FinanceHacks was awarded **First Place** at the NSBE-SHPE RPI Hackathon! This recognition is a testament to our commitment to developing practical, through sacrificing sleep and using new technologies.
 
 ## Getting Started
 
