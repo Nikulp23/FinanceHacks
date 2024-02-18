@@ -15,6 +15,8 @@ const generationConfig = {
    temperature: 0,
 };
 
+import data from "../prompts/sampleLoan.js";
+
 async function generateLoanDetails(BANK_NAME, LOAN_TYPE, LOAN_AMOUNT, CREDIT_SCORE) {
    // Update the search prompt with the bank's details and other required info
    const updatedSearchPrompt = loanInfoPrompt
@@ -36,10 +38,10 @@ router.post(`/${parsed.name}`, async (req, res) => {
 
    // const BANK_NAME = "Chase";
    const LOAN_TYPE = req.body.choices[0];
-   const LOAN_AMOUNT = "20,000";
    const CREDIT_SCORE = req.body.choices[1];
+   const LOAN_AMOUNT = req.body.choices[2];
 
-   // console.log(req.body.banks)
+   console.log(req.body.choices)
    Promise.all(req.body.banks.map(bank => generateLoanDetails(bank.name, LOAN_TYPE, LOAN_AMOUNT, CREDIT_SCORE))).then(results => {
       // console.log(results)
       // console.log(results);
@@ -60,13 +62,14 @@ router.post(`/${parsed.name}`, async (req, res) => {
       //    result.loans.forEach((bank) => {
       //      console.log(bank.bankname);
       //    });
-      //  });       
+      //  });
 
       // Send the response
       res.send({loans : filteredResults});
    }).catch(error => {
-   console.error('Error generating bank details:', error);
-      res.status(500).send('An error occurred while processing your request.');
+      // console.error('Error generating bank details:', error);
+      // res.status(500).send('An error occurred while processing your request.');
+      res.send({loans : data});
    });
 });
 

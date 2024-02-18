@@ -32,8 +32,9 @@ async function generateCreditDetails(BANK_NAME, CARD_TYPE, CREDIT_SCORE) {
 
 router.post(`/${parsed.name}`, async (req, res) => {  
    const CARD_TYPE = req.body.choices[0];
-   const CREDIT_SCORE = "650";
 
+   const CREDIT_SCORE = "650";
+   
    Promise.all(req.body.banks.map(bank => generateCreditDetails(bank.name, CARD_TYPE, CREDIT_SCORE))).then(results => {
       const jsonObjectsArray = results.reduce((acc, jsonString) => {
          try {
@@ -59,17 +60,6 @@ router.post(`/${parsed.name}`, async (req, res) => {
    console.error('Error generating bank details:', error);
       res.status(500).send('An error occurred while processing your request.');
    });
-   // const updatedSearchPrompt = creditCardPrompt
-   //    .replaceAll('BANK_NAME', BANK_NAME)
-   //    .replaceAll('CARD_TYPE',CARD_TYPE)
-   //    .replaceAll('CREDIT_SCORE', CREDIT_SCORE)
-
-   // const result = await model.generateContent(updatedSearchPrompt);
-   // const response = result.response;
-   // const text = response.text();
-
-   // // console.log(text);
-   // res.send(text);
 });
 
 export default router;

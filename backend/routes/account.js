@@ -13,6 +13,8 @@ const generationConfig = {
    temperature: 0,
 };
 
+import data from "../prompts/sampleAccount.js";
+
 async function generateBankDetails(bank, CITIZENSHIP_STATUS, CURRENT_AGE, WORKING_STATUS) {
    const BANK_NAME = bank.name;
    const BANK_ADDRESS = bank.address;
@@ -51,18 +53,19 @@ router.post(`/${parsed.name}`, async (req, res) => {
 
      const filteredResults = jsonObjectsArray.filter(item => !item.error);
 
-      filteredResults.forEach((result) => {
-         // Assuming 'result.banks' is an array and we want the 'bankname' from each bank object in it
-         result.banks.forEach((bank) => {
-           console.log(bank.bankname);
-         });
-       });       
+      // filteredResults.forEach((result) => {
+      //    // Assuming 'result.banks' is an array and we want the 'bankname' from each bank object in it
+      //    result.banks.forEach((bank) => {
+      //      console.log(bank.bankname);
+      //    });
+      //  });
 
       // Send the response
       res.send({banks : filteredResults});
    }).catch(error => {
-   console.error('Error generating bank details:', error);
-      res.status(500).send('An error occurred while processing your request.');
+      console.error('Error generating bank details:', error);
+      res.send({banks : data});
+      // res.status(500).send('An error occurred while processing your request.');
    });
 });
 
