@@ -179,7 +179,7 @@ const Content = ({selectedOption}) => {
             text: "What is your approximate credit score?",
             sender: 'ai',
             type: 'buttons',
-            options: [{ label: "750+", value: "750+" }, { label: "600+", value: "600+" }]
+            options: [{ label: "CREDIT SCORE: BELOW 650", value: "CREDIT SCORE: BELOW 650" }, { label: "CREDIT SCORE: ABOVE 650", value: "CREDIT SCORE ABOVE 650+ "}]
           });
           break;
         case 1:
