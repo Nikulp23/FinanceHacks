@@ -2,10 +2,10 @@ import React from 'react';
 import capitalizeWords from "../../../utils/capitalizeWords.js";
 
 const CreditFormat = ({ cards }) => {
-  if (!Array.isArray(cards)) {
-    return <div>No credit card information available.</div>;
-  }
-  
+  // if (!Array.isArray(cards)) {
+  //   return <div>No credit card information available.</div>;
+  // }
+  console.log(cards)
   return (
     <div>
       {cards.map((card, index) => (

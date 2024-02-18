@@ -239,7 +239,7 @@ const getCreditInformation = async (choices) => {
   axiosCancelSource.current = axios.CancelToken.source(); // Create a new cancel token source
 
   try {
-    const response = await axios.post('http://localhost:8080/getCredit', { choices }, {
+    const response = await axios.post('http://localhost:8080/getCredit', { choices, banks }, {
       cancelToken: axiosCancelSource.current.token // Use the cancel token in the request
     });
 
