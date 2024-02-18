@@ -14,24 +14,63 @@ const generationConfig = {
    temperature: 0,
 };
 
-router.post(`/${parsed.name}`, async (req, res) => {  
-   const model = genAI.getGenerativeModel({ model: "gemini-pro", generationConfig});
-
-   const BANK_NAME = "Chase Bank";
-   const CARD_TYPE = req.body.choices[0];
-   const CREDIT_SCORE = "any";
-   
+async function generateCreditDetails(BANK_NAME, CARD_TYPE, CREDIT_SCORE) {
+ 
+   // Update the search prompt with the bank's details and other required info
    const updatedSearchPrompt = creditCardPrompt
       .replaceAll('BANK_NAME', BANK_NAME)
       .replaceAll('CARD_TYPE',CARD_TYPE)
       .replaceAll('CREDIT_SCORE', CREDIT_SCORE)
+ 
+      // Return a promise that resolves with the generated content
+      const model = genAI.getGenerativeModel({ model: "gemini-pro", generationConfig});
+      return model.generateContent(updatedSearchPrompt).then(result => {
+         const response = result.response;
+         return response.text(); 
+      });
+ }
 
-   const result = await model.generateContent(updatedSearchPrompt);
-   const response = result.response;
-   const text = response.text();
+router.post(`/${parsed.name}`, async (req, res) => {  
+   const CARD_TYPE = req.body.choices[0];
+   const CREDIT_SCORE = "any";
+   
+   console.log(req.body)
+   Promise.all(req.body.banks.map(bank => generateCreditDetails(bank.name, CARD_TYPE, CREDIT_SCORE))).then(results => {
+      const jsonObjectsArray = results.reduce((acc, jsonString) => {
+         try {
+             const jsonObject = JSON.parse(jsonString);
+             acc.push(jsonObject);
+         } catch (error) {
+         }
+         return acc;
+     }, []);
 
-   // console.log(text);
-   res.send(text);
+     const filteredResults = jsonObjectsArray.filter(item => !item.error);
+
+      // filteredResults.forEach((result) => {
+      //    // Assuming 'result.banks' is an array and we want the 'bankname' from each bank object in it
+      //    result.banks.forEach((bank) => {
+      //      console.log(bank.bankname);
+      //    });
+      //  });       
+
+      // Send the response
+      res.send({cards : filteredResults});
+   }).catch(error => {
+   console.error('Error generating bank details:', error);
+      res.status(500).send('An error occurred while processing your request.');
+   });
+   // const updatedSearchPrompt = creditCardPrompt
+   //    .replaceAll('BANK_NAME', BANK_NAME)
+   //    .replaceAll('CARD_TYPE',CARD_TYPE)
+   //    .replaceAll('CREDIT_SCORE', CREDIT_SCORE)
+
+   // const result = await model.generateContent(updatedSearchPrompt);
+   // const response = result.response;
+   // const text = response.text();
+
+   // // console.log(text);
+   // res.send(text);
 });
 
 export default router;

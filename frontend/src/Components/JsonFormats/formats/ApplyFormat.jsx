@@ -2,8 +2,12 @@ import React from 'react';
 import capitalizeWords from "../../../utils/capitalizeWords.js";
 
 const ApplyFormat = ({ loans }) => {
+
+  if (!loans || loans.length === 0) {
+    // Optionally, render a fallback UI or return null/empty div if there are no loans
+    return <div></div>;
+  }
   
-  console.log(loans)
   return (
     <div>
       {loans.map((loanRaw, index) => (
