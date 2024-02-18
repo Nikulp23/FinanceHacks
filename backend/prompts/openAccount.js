@@ -42,6 +42,8 @@ Please respond with plaintext only. Fill in this JSON template with information 
   ]
 }
 
+If CITIZENSHIP_STATUS is non-US, imagine I am a bank that wants to help a non-US citizen open an account. What information could I provide to them to help them out?
+
 If you cannot find the answer, return the below JSON. This should only be used when you have tried everything and cannot determine this to be a finance-related issue. {
   "error": "Unknown Request",
   "reason": Give a reason why an answer could not be found
