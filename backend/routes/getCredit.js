@@ -10,9 +10,12 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import creditCardPrompt from '../prompts/creditCard.js';
 
 const genAI = new GoogleGenerativeAI("AIzaSyCp4kRI9XDs4rDs6AQusexuPbHemYC5CPk");
+const generationConfig = {
+   temperature: 0,
+};
 
 router.post(`/${parsed.name}`, async (req, res) => {  
-   const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+   const model = genAI.getGenerativeModel({ model: "gemini-pro", generationConfig});
 
    const BANK_NAME = "Chase Bank";
    const CARD_TYPE = req.body.choices[0];
