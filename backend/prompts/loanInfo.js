@@ -14,7 +14,7 @@ Please respond with plaintext only. Fill in this JSON as your response, and resp
 {
   "loans": [
     {
-      "bank_name": "BANK_NAME",
+      "bankname": "BANK_NAME",
       "loan_type": "LOAN_TYPE",
       "loan_amount_requested": "LOAN_AMOUNT",
       "applicant_credit_score": "CREDIT_SCORE",
