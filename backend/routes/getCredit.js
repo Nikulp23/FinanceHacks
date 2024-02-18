@@ -30,7 +30,7 @@ router.post(`/${parsed.name}`, async (req, res) => {
    const response = result.response;
    const text = response.text();
 
-   console.log(text);
+   // console.log(text);
    res.send(text);
 });
 

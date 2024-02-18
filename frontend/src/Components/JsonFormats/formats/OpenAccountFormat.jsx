@@ -2,7 +2,7 @@ import React from 'react';
 import capitalizeWords from "../../../utils/capitalizeWords.js"
 
 const OpenAccountFormat = ({ banks }) => {
-  console.log(banks)
+  // console.log(banks)
   return (
     <div>
       {banks.map((bank, index) => (

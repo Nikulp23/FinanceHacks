@@ -57,7 +57,7 @@ async function fetchDistance(startCoords, endCoords) {
 async function fetchNearbyBanks(userLocation) {
   let response;
   try {
-    console.log("Fetching nearby bank");
+    // console.log("Fetching nearby bank");
     response = await fetch(`https://dev.virtualearth.net/REST/v1/LocalSearch/?query=banks&userLocation=${userLocation[0]}
     ,${userLocation[1]}&maxResults=10&key=Ag46A1RC8faoCPh9La1fZF7uxL6IAmQETCrErkWSqvBNWyH_BUkZC2nI2F2JIKEW`);
   } catch(e) {
