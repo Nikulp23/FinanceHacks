@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Sidebar.css';
 import NearbyBanks from '../NearbyBanks/NearbyBanks';
+// import logo from "../../assets/ai.jpg"
+
 
 const Sidebar = ({ setSelectedOption, banks, setBanks, selectedAddress }) => {
   // State to track the selected menu item, defaulting to 'general'
@@ -17,7 +19,8 @@ const Sidebar = ({ setSelectedOption, banks, setBanks, selectedAddress }) => {
     <>
       <div className="sidebar">
         <div className="sidebar-header">
-          <h1>Bank of the Future</h1>
+          {/* <img src={logo} sidebar-log alt="logo" className='sidebar-logo'/> */}
+          <h1>Finance For All</h1>
           <p>Trusted, AI-powered Data</p>
         </div>
 
