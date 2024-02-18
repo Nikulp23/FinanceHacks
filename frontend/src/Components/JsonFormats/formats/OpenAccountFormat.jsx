@@ -2,12 +2,16 @@ import React from 'react';
 import capitalizeWords from "../../../utils/capitalizeWords.js"
 
 const OpenAccountFormat = ({ banks }) => {
-  console.log(banks)
+  if (!Array.isArray(banks)) {
+    return <div>No information available.</div>;
+  }
+
   return (
     <div>
       {banks.map((bank, index) => (
         <div key={index} className="bank-information">
-          <h2>{capitalizeWords(bank.bankname)}:</h2>
+
+          {/* <h2>{capitalizeWords(bank.bankname)}:</h2>
           <p><strong>Address:</strong> {bank.address}</p>
 
           <h3>Account Opening Requirements:</h3>
@@ -35,8 +39,9 @@ const OpenAccountFormat = ({ banks }) => {
           {bank.promotions !== "None" &&
             <p><strong>Promotions:</strong> {bank.promotions}</p>
           }
-          <hr />
-        </div>
+          <hr />*/}
+        </div> 
+
       ))}
     </div>
   );
