@@ -43,7 +43,8 @@ Please respond with plaintext only. Fill in this JSON template with information 
 }
 
 If you cannot find the answer, return the below JSON. This should only be used when you have tried everything and cannot determine this to be a finance-related issue. {
-  "error": "Unknown Request"
+  "error": "Unknown Request",
+  "reason": Give a reason why an answer could not be found
 }
 `;
 

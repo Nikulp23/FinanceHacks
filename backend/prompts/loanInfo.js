@@ -14,7 +14,7 @@ Please respond with plaintext only. Fill in this JSON as your response, and resp
 {
   "loans": [
     {
-      "bank_name": "BANK_NAME",
+      "bankname": "BANK_NAME",
       "loan_type": "LOAN_TYPE",
       "loan_amount_requested": "LOAN_AMOUNT",
       "applicant_credit_score": "CREDIT_SCORE",
@@ -30,7 +30,8 @@ Please respond with plaintext only. Fill in this JSON as your response, and resp
 }
 
 If you cannot find the answer, return the below JSON instead. Remember, this should only be used when you have tried everything and cannot find the loan information. {
-  "error": "Unknown Request"
+  "error": "Unknown Request",
+  "reason": Give a reason why an answer could not be found
 }
 `;
 
