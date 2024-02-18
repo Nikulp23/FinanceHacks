@@ -3,8 +3,8 @@ import './Sidebar.css';
 import NearbyBanks from '../NearbyBanks/NearbyBanks';
 
 const Sidebar = ({ setSelectedOption, banks, setBanks, selectedAddress }) => {
-  // State to track the selected menu item, defaulting to 'welcome'
-  const [selectedItem, setSelectedItem] = useState('welcome');
+  // State to track the selected menu item, defaulting to 'general'
+  const [selectedItem, setSelectedItem] = useState('general');
   // console.log("SIDEBAR: ",selectedAddress);
 
   // Function to handle menu item clicks
@@ -22,8 +22,8 @@ const Sidebar = ({ setSelectedOption, banks, setBanks, selectedAddress }) => {
         </div>
 
         <div className="sidebar-menu">
-          <button className={`menu-item ${selectedItem === 'welcome' ? 'selected' : ''}`} onClick={() => handleMenuItemClick('welcome')}>
-            <span className="icon">🏠</span> Welcome
+          <button className={`menu-item ${selectedItem === 'general' ? 'selected' : ''}`} onClick={() => handleMenuItemClick('general')}>
+            <span className="icon">🏠</span> General
           </button>
           <button className={`menu-item ${selectedItem === 'openAccount' ? 'selected' : ''}`} onClick={() => handleMenuItemClick('openAccount')}>
             <span className="icon">👤</span> Open Account
