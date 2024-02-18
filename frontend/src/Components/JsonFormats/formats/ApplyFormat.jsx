@@ -2,6 +2,13 @@ import React from 'react';
 import capitalizeWords from "../../../utils/capitalizeWords.js"
 
 const ApplyFormat = ({ banks }) => {
+
+  // Check if banks is truthy and is an array before rendering
+  if (!Array.isArray(banks)) {
+    // Optionally, return a message or null if banks is not an array
+    return <div>No bank information available.</div>;
+  }
+  
   console.log(banks)
   return (
     <div>

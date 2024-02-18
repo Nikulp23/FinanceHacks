@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './Content.css';
 import SearchBar from '../SearchBar/SearchBar';
@@ -6,6 +6,8 @@ import SearchBar from '../SearchBar/SearchBar';
 import JsonFormat from '../JsonFormats/JsonFormat.jsx'
 
 const Content = ({selectedOption}) => {
+
+  const axiosCancelSource = useRef(null);
 
   const [conversation, setConversation] = useState([]);
   const [step, setStep] = useState(0);
@@ -51,6 +53,12 @@ const Content = ({selectedOption}) => {
       setUserChoices([]);
       setStep(0);
     }
+
+    return () => {
+      if (axiosCancelSource.current) {
+        axiosCancelSource.current.cancel("Component unmounted: Request canceled.");
+      }
+    };
   }, [selectedOption]);
 
   // Function to handle adding a new message to the conversation
@@ -128,21 +136,39 @@ const Content = ({selectedOption}) => {
  
  // CHAT FEATURES - WORKS FOR ALL PART
  const sendMessage = async (userMessage) => {
+  // Update the conversation state immediately with user message
   const updatedConversation = [...conversation, { text: userMessage, sender: 'user', type: 'text' }];
   setConversation(updatedConversation);
 
+  // Cancel any ongoing request
+  if (axiosCancelSource.current) {
+    axiosCancelSource.current.cancel("Cancelling previous request.");
+  }
+  // Create a new cancel token source for this request
+  axiosCancelSource.current = axios.CancelToken.source();
+
   try {
-    const response = await axios.post('http://localhost:8080/getResponse', { conversation: updatedConversation });
+    const response = await axios.post('http://localhost:8080/getResponse', { conversation: updatedConversation }, {
+      cancelToken: axiosCancelSource.current.token // Use the cancel token in this request
+    });
     setConversation(prevConvo => [...prevConvo, { text: response.data, sender: 'ai', type: 'text' }]);
   } catch (error) {
-    console.error('API call failed:', error);
+    if (!axios.isCancel(error)) {
+      console.error('API call failed:', error);
+    }
   }
 };
 
-// Define the function to make the API call
 const getLoanInformation = async (choices) => {
+  if (axiosCancelSource.current) {
+    axiosCancelSource.current.cancel("Cancelling previous request.");
+  }
+  axiosCancelSource.current = axios.CancelToken.source(); // Create a new cancel token source
+
   try {
-    const response = await axios.post('http://localhost:8080/getLoans', { choices });
+    const response = await axios.post('http://localhost:8080/getLoans', { choices }, {
+      cancelToken: axiosCancelSource.current.token // Use the cancel token in the request
+    });
 
     addMessageToConversation({
       text: response.data,
@@ -150,14 +176,25 @@ const getLoanInformation = async (choices) => {
       type: 'json'
     });
   } catch (error) {
-    console.error('API call failed:', error);
+    if (!axios.isCancel(error)) {
+      console.error('API call failed:', error);
+    }
   }
 };
 
 // Define the function to make the API call
 const getAccountInformation = async (choices) => {
+  // Cancel any ongoing request
+  if (axiosCancelSource.current) {
+    axiosCancelSource.current.cancel("Cancelling previous request.");
+  }
+  // Create a new cancel token source for this request
+  axiosCancelSource.current = axios.CancelToken.source();
+
   try {
-    const response = await axios.post('http://localhost:8080/account', { choices });
+    const response = await axios.post('http://localhost:8080/account', { choices }, {
+      cancelToken: axiosCancelSource.current.token // Use the cancel token in the request
+    });
 
     addMessageToConversation({
       text: response.data,
@@ -165,9 +202,11 @@ const getAccountInformation = async (choices) => {
       type: 'json'
     });
   } catch (error) {
-    console.error('API call failed:', error);
+    if (!axios.isCancel(error)) {
+      console.error('API call failed:', error);
+    }
   }
- };
+};
 
   return (
     <div className="content">

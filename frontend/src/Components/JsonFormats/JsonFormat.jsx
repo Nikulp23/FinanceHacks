@@ -23,7 +23,7 @@ const JsonFormat = ({ data, selectedOption }) => {
     return <div>Select Credit Card</div>
    }
    else {
-    return <div>{data}</div>
+  return <pre>{JSON.stringify(data, null, 2)}</pre>;
    }
  };
  
