@@ -1,7 +1,7 @@
 import React from 'react';
 import capitalizeWords from "../../../utils/capitalizeWords.js";
 
-const ApplyFormat = ({ banks }) => {
+const ApplyFormat = ({ banks, loans }) => {
 
   // Check if banks is truthy and is an array before rendering
   if (!Array.isArray(banks)) {

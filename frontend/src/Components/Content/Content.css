@@ -64,3 +64,7 @@
    border-radius: 50%; 
    flex-shrink: 0;
 }
+
+.loading {
+   margin-left: 20px;
+}
