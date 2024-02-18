@@ -16,7 +16,6 @@ const JsonFormat = ({ data, selectedOption }) => {
    } 
    else if (selectedOption === 'applyLoan') {
     return <div>{data}</div>
-    return <div>Apply loan</div>
    }
    else if (selectedOption === 'selectCreditCard') {
     return <div>Select Credit Card</div>
