@@ -16,13 +16,13 @@ const Content = ({selectedOption, banks}) => {
   const [step, setStep] = useState(0);
   const [userChoices, setUserChoices] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const [hasSentMessage, setHasSentMessage] = useState(false);
 
-  // Handle cleanup and state reset when the component unmounts or selectedOption changes
   useEffect(() => {
     if (selectedOption !== 'general') {
       setHasSentMessage(false);
-    }
+    } 
 
     return () => {
       if (axiosCancelSource.current) {
@@ -31,12 +31,8 @@ const Content = ({selectedOption, banks}) => {
     };
   }, [selectedOption]);
 
-  // Handle initializing or clearing the conversation based on selectedOption
   useEffect(() => {
     setLoading(false);
-    setConversation([]); // Always reset conversation when option changes
-    setUserChoices([]);
-    setStep(0);
 
     // Reset the conversation when the selected option changes
     if (selectedOption === 'openAccount') {
@@ -243,9 +239,11 @@ const getCreditInformation = async (choices) => {
   axiosCancelSource.current = axios.CancelToken.source(); // Create a new cancel token source
 
   try {
-    const response = await axios.post('http://localhost:8080/getCredit', { choices, banks }, {
+    const response = await axios.post('http://localhost:8080/getCredit', { choices }, {
       cancelToken: axiosCancelSource.current.token // Use the cancel token in the request
     });
+
+    console.log("REACHED");
 
     addMessageToConversation({
       text: response.data,

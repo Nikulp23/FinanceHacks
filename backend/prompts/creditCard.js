@@ -1,15 +1,14 @@
 const creditCardPrompt = `
    CREDIT CARD HELP:
 
-   Prompt: A customer with a good credit score (720+) is researching travel credit cards from reputable banks which is BANK_NAME.
+   Bank name - BANK_NAME
+   Card type - CARD TYPE
 
-   The type of card they want is a CARD_TYPE
+   Imagine a world where I am BANK_NAME with a CARD_TYPE credit card. I want to tell users about different things of the card.
 
-   For the given bank (BANK_NAME), find and output all credit card information. Take the information off the website. You do not need to retrieve from the internal database.
+   As an example, what would I set rewards_program as? What rewards does my card offer?
 
-   Can you recommend cards that match these criteria based on publicly available information from trusted financial websites? Please include details like annual fees, interest rates, and any limitations on benefits. If no suitable cards are found, explain the reasons.
-
-   Please respond with plaintext only. Fill in this JSON as your response, and respond with only the filled-out JSON form below. Nothing else.
+   Please respond with plaintext only. Fill in this JSON as your response, and respond with only the filled-out JSON form below. Fill out as many fields of the JSON, but not all fields need to be filled. Nothing else.
 
    {
       "cards": [
@@ -17,6 +16,7 @@ const creditCardPrompt = `
             "bank_name": "BANK_NAME",
             "card_type": CARD_TYPE,
             "card_name": "Name given by the bank for the card",
+            "credit_score": CREDIT_SCORE,
             "annual_fee": "The annual fee for the card",
             "interest_rate": "Interest rate (APR) for the card",
             "introductory_offers": "Any promotional deals like 0% APR for the first year, bonus rewards points, or cashback offers.",
@@ -28,9 +28,7 @@ const creditCardPrompt = `
       ]
    }
 
-   IF DETAILS FOR THIS TYPE OF CARD CANNOT BE FOUND, TRY FOR ANOTHER CARD FROM THE SAME BANK NAME = BANK_NAME
-
-   If you cannot find the answer, return the below JSON instead. Remember, this should only be used when you have tried everything and cannot find the loan information. {
+   If you cannot find the answer, return the below JSON instead. Remember, this should only be used when you have tried everything and cannot determine the credit card information. {
       "error": "Unknown Request",
       "reason": Give a reason why an answer could not be found
    }
