@@ -1,13 +1,19 @@
 const loanInfoPrompt = `
 Finance Problem:
 
-OUTPUT LOAN INFORMATION - BANK NAME
+NAME OF BANK - BANK_NAME
 
 TYPE OF LOAN - LOAN_TYPE
 
-INTENDS TO BORROW - LOAN AMOUNT
+LOAN AMOUNT - LOAN_AMOUNT
 
-HAS A CREDIT SCORE - CREDIT_SCORE.
+CREDIT SCORE - CREDIT_SCORE
+
+Based on this information, imagine a world where I am BANK_NAME and I want to set information about my different loans offered.
+
+As an example, what would I make my interest rate for LOAN_TYPE?
+
+Make sure the conditions given are met in the response.
 
 Please respond with plaintext only. Fill in this JSON as your response, and respond with only the filled-out JSON form below. Nothing else.
 
@@ -16,8 +22,6 @@ Please respond with plaintext only. Fill in this JSON as your response, and resp
     {
       "bankname": "BANK_NAME",
       "loan_type": "LOAN_TYPE",
-      "loan_amount_requested": "LOAN_AMOUNT",
-      "applicant_credit_score": "CREDIT_SCORE",
       "interest_rate": "Interest rate for the loan",
       "loan_term": "Term of the loan (e.g., 15 years, 30 years)",
       "minimum_credit_score": "Minimum credit score required",
@@ -29,8 +33,8 @@ Please respond with plaintext only. Fill in this JSON as your response, and resp
   ]
 }
 
-If you cannot find the answer, return the below JSON instead. Remember, this should only be used when you have tried everything and cannot find the loan information. {
-  "error": "Unknown Request",
+If you cannot find the answer, return the below JSON instead. Remember, this should only be used when you have tried everything and cannot determine loan information. {
+  "error": "Unknown Request"
   "reason": Give a reason why an answer could not be found
 }
 `;
