@@ -41,7 +41,6 @@ router.post(`/${parsed.name}`, async (req, res) => {
    const CREDIT_SCORE = req.body.choices[1];
    const LOAN_AMOUNT = req.body.choices[2];
 
-   console.log(req.body.choices)
    Promise.all(req.body.banks.map(bank => generateLoanDetails(bank.name, LOAN_TYPE, LOAN_AMOUNT, CREDIT_SCORE))).then(results => {
       // console.log(results)
       // console.log(results);
