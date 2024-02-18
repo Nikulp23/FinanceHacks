@@ -20,7 +20,7 @@ Please respond with plaintext only. Fill in this JSON as your response, and resp
 {
   "loans": [
     {
-      "bank_name": "BANK_NAME",
+      "bankname": "BANK_NAME",
       "loan_type": "LOAN_TYPE",
       "interest_rate": "Interest rate for the loan",
       "loan_term": "Term of the loan (e.g., 15 years, 30 years)",
