@@ -36,10 +36,10 @@ router.post(`/${parsed.name}`, async (req, res) => {
 
    // const BANK_NAME = "Chase";
    const LOAN_TYPE = req.body.choices[0];
-   const LOAN_AMOUNT = "20,000";
    const CREDIT_SCORE = req.body.choices[1];
+   const LOAN_AMOUNT = req.body.choices[2];
 
-   // console.log(req.body.banks)
+   console.log(req.body.choices)
    Promise.all(req.body.banks.map(bank => generateLoanDetails(bank.name, LOAN_TYPE, LOAN_AMOUNT, CREDIT_SCORE))).then(results => {
       // console.log(results)
       // console.log(results);

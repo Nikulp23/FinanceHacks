@@ -161,6 +161,15 @@ const Content = ({selectedOption, banks}) => {
           });
           break;
         case 1:
+            // Ask the next question
+            addMessageToConversation({
+              text: "Approximate loan amount?",
+              sender: 'ai',
+              type: 'buttons',
+              options: [{ label: "$10,000", value: "$10,000" }, { label: "$30,000", value: "$30,000"}, { label: "$100,000+", value: "OVER $100,000"}]
+            });
+            break;
+        case 2:
           // Make API call with the user's choices
           getLoanInformation(updatedChoices);
           break;
