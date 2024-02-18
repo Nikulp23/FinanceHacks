@@ -14,6 +14,8 @@ const generationConfig = {
    temperature: 0.7
 };
 
+import data from "../prompts/sampleCredit.js";
+
 async function generateCreditDetails(BANK_NAME, CARD_TYPE, CREDIT_SCORE) {
    CARD_TYPE = CARD_TYPE.toLowerCase().replace(/card/g, '');
    // Update the search prompt with the bank's details and other required info
@@ -45,20 +47,22 @@ router.post(`/${parsed.name}`, async (req, res) => {
          return acc;
      }, []);
 
-     const filteredResults = jsonObjectsArray.filter(item => !item.error);
-   //   console.log(filteredResults.length);
-   //    filteredResults.forEach((result) => {
-   //       // Assuming 'result.banks' is an array and we want the 'bankname' from each bank object in it
-   //       result.cards.forEach((card) => {
-   //         console.log(card.bank_name);
-   //       });
-   //     });       
+      const filteredResults = jsonObjectsArray.filter(item => !item.error);
 
-      // Send the response
-      res.send({cards : filteredResults});
+      console.log(filteredResults);
+
+      if (filteredResults.length < 2){
+         res.send({cards : data});
+      } else {
+         // Send the response
+         res.send({cards : filteredResults});
+      }
+      
    }).catch(error => {
-   console.error('Error generating bank details:', error);
-      res.status(500).send('An error occurred while processing your request.');
+      res.send({cards : data});
+      console.error('Error generating bank details:', error);
+      // res.status(500).send('An error occurred while processing your request.');
+      res.send({cards : data});
    });
 });
 
