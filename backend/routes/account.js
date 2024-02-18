@@ -40,7 +40,7 @@ router.post(`/${parsed.name}`, async (req, res) => {
 
    Promise.all(req.body.banks.map(bank => generateBankDetails(bank, CITIZENSHIP_STATUS, CURRENT_AGE, WORKING_STATUS))).then(results => {
 
-      // console.log(results);
+      console.log(results);
 
       const jsonObjectsArray = results.reduce((acc, jsonString) => {
          try {
