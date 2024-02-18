@@ -6,6 +6,7 @@ const OpenAccountFormat = ({ banks }) => {
     return <div>No information available.</div>;
   }
 
+
   // console.log(banks)
   return (
     <div>

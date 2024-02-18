@@ -63,7 +63,7 @@ const NearbyBanks = ({ banks, setBanks, selectedAddress}) => {
     <>
       <div className="sidebar-bottom">
         <div className="find-branches">
-          <h2>📍Find Branches/ATMs</h2>
+          <h2>📍Nearby Banks</h2>
           <div className="branch-list">
             {banks.map((bank, index) => (
               <div key={index} className="branch">

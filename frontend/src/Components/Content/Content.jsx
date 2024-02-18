@@ -337,13 +337,17 @@ const getAccountInformation = async (choices) => {
             )}
           </div>
         ))}
-        {loading && 
+        {loading && <div className='message ai'>
+          <div className="avatarLoading" />
           <l-leapfrog
             size="46"
             speed="2.5" 
             color="black" 
-            className="loading"
-          ></l-leapfrog>}
+            className="loading message ai"
+          ></l-leapfrog>
+        </div>
+        }
+        
       </div>
       <SearchBar onSend={sendMessage} />
     </div>
