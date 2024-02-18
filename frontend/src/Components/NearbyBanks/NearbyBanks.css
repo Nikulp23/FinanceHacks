@@ -1,8 +1,10 @@
 
 .sidebar-bottom {
-  margin-top: auto; 
+  /* margin-top: auto;  */
   padding: 20px;
   border-top: 1px solid #eaeaea; 
+  height: auto;
+  overflow-y: scroll;
 }
 
 .find-branches h2 {
@@ -17,8 +19,8 @@
   background-color: #f9f9f9;
   padding: 10px;
   border-radius: 10px;
-  max-height: 30vh; 
-  overflow-y: auto; 
+  height: 100vh - 250px; 
+  overflow-y: scroll; 
 }
 
 .branch-list::-webkit-scrollbar {

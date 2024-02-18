@@ -9,6 +9,9 @@ const parsed = path.parse(__filename);
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import openAccountDetailsPrompt from '../prompts/openAccount.js';
 const genAI = new GoogleGenerativeAI("AIzaSyCp4kRI9XDs4rDs6AQusexuPbHemYC5CPk");
+const generationConfig = {
+   temperature: 0,
+};
 
 router.post(`/${parsed.name}`, async (req, res) => {
    
@@ -27,7 +30,7 @@ router.post(`/${parsed.name}`, async (req, res) => {
       .replaceAll('CURRENT_AGE', CURRENT_AGE)
       .replaceAll('WORKING_STATUS', WORKING_STATUS);
 
-   const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+   const model = genAI.getGenerativeModel({ model: "gemini-pro", generationConfig});
    const result = await model.generateContent(updatedSearchPrompt);
    const response = result.response;
    const text = response.text();

@@ -33,6 +33,7 @@
 .sidebar-menu {
   display: flex;
   flex-direction: column;
+  height: fit-content;
 }
 
 .menu-item {

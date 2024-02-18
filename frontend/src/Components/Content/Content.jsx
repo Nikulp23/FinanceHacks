@@ -17,6 +17,20 @@ const Content = ({selectedOption}) => {
   const [userChoices, setUserChoices] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const [hasSentMessage, setHasSentMessage] = useState(false);
+
+  useEffect(() => {
+    if (selectedOption !== 'general') {
+      setHasSentMessage(false);
+    } 
+
+    return () => {
+      if (axiosCancelSource.current) {
+        axiosCancelSource.current.cancel("Component unmounted: Request canceled.");
+      }
+    };
+  }, [selectedOption]);
+
   useEffect(() => {
     setLoading(false);
 
@@ -24,14 +38,14 @@ const Content = ({selectedOption}) => {
     if (selectedOption === 'openAccount') {
       // Initialize with the first message for 'openAccount'
       setConversation([{
-        text: "Welcome, we are here to help you to Opening an account. Before we proceed you will need to answer some questions.",
+        text: "Welcome! We're here to assist you with opening an account. Before we proceed, we'll need you to answer a few questions.",
         sender: 'ai',
         type: 'text'
       }, {
         text: "What is your citizenship status?",
         sender: 'ai',
         type: 'buttons',
-        options: [{ label: "US", value: "US Citizenship" }, { label: "NON US", value: "Non-US Citizenship" }]
+        options: [{ label: "US CITIZEN", value: "US CITIZEN" }, { label: "NON US CITIZEN", value: "NON US CITIZEN" }]
       }]);
       setUserChoices([]);
       setStep(0);
@@ -40,14 +54,30 @@ const Content = ({selectedOption}) => {
 
       // Initialize with the first message for 'openAccount'
       setConversation([{
-        text: "Welcome, we are here to help you to Apply Loan. Before we proceed you will need to answer some questions.",
+        text: "Welcome! We're here to guide you through the loan application process. Before we can proceed, we'll need you to answer some questions.",
         sender: 'ai',
         type: 'text'
       }, {
         text: "What type of Loan do you want?",
         sender: 'ai',
         type: 'buttons',
-        options: [{ label: "Student Loan", value: "Students Loan" }, { label: "Personal Loan", value: "Personal Loan" }]
+        options: [{ label: "STUDENT LOAN", value: "STUDENT LOAN" }, { label: "PERSONAL LOAN", value: "PERSONAL LOAN" }]
+      }]);
+      setUserChoices([]);
+      setStep(0);
+    }
+    else if (selectedOption === 'selectCreditCard'){
+
+      // Initialize with the first message for 'openAccount'
+      setConversation([{
+        text: "Welcome! We're here to assist you with your credit card needs. Before we proceed, please answer a few questions to help us serve you better.",
+        sender: 'ai',
+        type: 'text'
+      }, {
+        text: "What type of card do you want?",
+        sender: 'ai',
+        type: 'buttons',
+        options: [{ label: "STUDENT CARD", value: "STUDENT CARD" }, { label: "BUSINESS CARD", value: "BUSINESS CARD" }, {label: "TRAVEL CARD", value: "TRAVEL CARD"},{label: "REWARDS CARD", value: "REWARDS CARD"}]
       }]);
       setUserChoices([]);
       setStep(0);
@@ -91,7 +121,7 @@ const Content = ({selectedOption}) => {
             text: "What is your age?",
             sender: 'ai',
             type: 'buttons',
-            options: [{ label: "20+", value: "20+" }, { label: "60+", value: "60+" }]
+            options: [{ label: "AGE: BELOW 20 YEARS", value: "BELOW 20 YEARS" }, { label: "AGE: 20 - 40 Years", value: "20 - 40 YEARS" }, { label: "Age: 40+ YEARS", value: "40+ YEARS" }]
           });
           break;
         case 1:
@@ -123,7 +153,7 @@ const Content = ({selectedOption}) => {
             text: "What is your approximate credit score?",
             sender: 'ai',
             type: 'buttons',
-            options: [{ label: "750+", value: "750+" }, { label: "600+", value: "600+" }]
+            options: [{ label: "CREDIT SCORE: BELOW 650", value: "CREDIT SCORE: BELOW 650" }, { label: "CREDIT SCORE: ABOVE 650", value: "CREDIT SCORE ABOVE 650+ "}]
           });
           break;
         case 1:
@@ -137,12 +167,44 @@ const Content = ({selectedOption}) => {
       // Move to the next step
       setStep(prevStep => prevStep + 1);
     }
+
+    // ONLY PROCEED IF OPTION IS LOANS
+    // Only proceed if 'openAccount' is selected
+    if (selectedOption === 'selectCreditCard') {
+      const updatedChoices = [...userChoices, userChoice];
+      setUserChoices(updatedChoices);
+    
+      // Add user choice to the conversation
+      addMessageToConversation({ text: userChoice, sender: 'user', type: 'text' });
+    
+      // Logic for 'openAccount'
+      switch (step) {
+        case 0:
+          // Ask the next question
+          addMessageToConversation({
+            text: "What is your approximate credit score?",
+            sender: 'ai',
+            type: 'buttons',
+            options: [{ label: "CREDIT SCORE: BELOW 650", value: "CREDIT SCORE: BELOW 650" }, { label: "CREDIT SCORE: ABOVE 650", value: "CREDIT SCORE ABOVE 650+ "}]
+          });
+          break;
+        case 1:
+          // Make API call with the user's choices
+          getCreditInformation(updatedChoices);
+          break;
+        default:
+          console.log("Conversation end or unknown step.");
+      }
+    
+      // Move to the next step
+      setStep(prevStep => prevStep + 1);
+    }
   };
 
- 
  // CHAT FEATURES - WORKS FOR ALL PART
  const sendMessage = async (userMessage) => {
   setLoading(true);
+  setHasSentMessage(true);
   // Update the conversation state immediately with user message
   const updatedConversation = [...conversation, { text: userMessage, sender: 'user', type: 'text' }];
   setConversation(updatedConversation);
@@ -167,6 +229,30 @@ const Content = ({selectedOption}) => {
 
   setLoading(false);
 };
+
+// CREDIT CARD INFORMATION
+const getCreditInformation = async (choices) => {
+  if (axiosCancelSource.current) {
+    axiosCancelSource.current.cancel("Cancelling previous request.");
+  }
+  axiosCancelSource.current = axios.CancelToken.source(); // Create a new cancel token source
+
+  try {
+    const response = await axios.post('http://localhost:8080/getCredit', { choices }, {
+      cancelToken: axiosCancelSource.current.token // Use the cancel token in the request
+    });
+
+    addMessageToConversation({
+      text: response.data,
+      sender: 'ai',
+      type: 'json'
+    });
+  } catch (error) {
+    if (!axios.isCancel(error)) {
+      console.error('API call failed:', error);
+    }
+  }
+}
 
 const getLoanInformation = async (choices) => {
   setLoading(true);
@@ -224,6 +310,12 @@ const getAccountInformation = async (choices) => {
 
   return (
     <div className="content">
+      {selectedOption === 'general' && !hasSentMessage && (
+        <div className="welcome-message">
+          <h2>Welcome!</h2>
+          <p>Please send us a message to get started.</p>
+        </div>
+      )}
       <div className="conversation">
         {conversation.map((message, index) => (
           <div key={index} className={`message ${message.sender}`}>
@@ -235,7 +327,7 @@ const getAccountInformation = async (choices) => {
             ) : (
               <div className="button-options">
                 {message.options.map((option, idx) => (
-                  <button key={idx} onClick={() => handleButtonClick(option.value)}>
+                  <button className='button-4' key={idx} onClick={() => handleButtonClick(option.value)}>
                     {option.label}
                   </button>
                 ))}

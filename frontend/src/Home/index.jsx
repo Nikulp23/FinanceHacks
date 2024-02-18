@@ -6,7 +6,7 @@ import Sidebar from '../Components/Sidebar/Sidebar'
 import Content from '../Components/Content/Content'
 
 const Home = () => {
-  const [selectedOption, setSelectedOption] = useState('welcome');
+  const [selectedOption, setSelectedOption] = useState('general');
   const [banks, setBanks] = useState([]);
 
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -19,7 +19,6 @@ const Home = () => {
       
         setSelectedAddress([latitude,longitude]);
 
-        console.log("HOME: ", selectedAddress)
       });
     }
     else {
