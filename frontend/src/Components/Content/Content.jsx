@@ -46,6 +46,22 @@ const Content = ({selectedOption}) => {
       setUserChoices([]);
       setStep(0);
     }
+    else if (selectedOption === 'selectCreditCard'){
+
+      // Initialize with the first message for 'openAccount'
+      setConversation([{
+        text: "Welcome, we are here to help you to help you with Credit Card. Before we proceed you will need to answer some questions.",
+        sender: 'ai',
+        type: 'text'
+      }, {
+        text: "What type of card do you want?",
+        sender: 'ai',
+        type: 'buttons',
+        options: [{ label: "Student Card", value: "Student Card" }, { label: "Business Card", value: "Business Card" }, {label: "Travel Card", value: "Travel Card"}]
+      }]);
+      setUserChoices([]);
+      setStep(0);
+    }
     
     else {
       // Clear the conversation for other options
@@ -131,9 +147,40 @@ const Content = ({selectedOption}) => {
       // Move to the next step
       setStep(prevStep => prevStep + 1);
     }
+
+    // ONLY PROCEED IF OPTION IS LOANS
+    // Only proceed if 'openAccount' is selected
+    if (selectedOption === 'selectCreditCard') {
+      const updatedChoices = [...userChoices, userChoice];
+      setUserChoices(updatedChoices);
+    
+      // Add user choice to the conversation
+      addMessageToConversation({ text: userChoice, sender: 'user', type: 'text' });
+    
+      // Logic for 'openAccount'
+      switch (step) {
+        case 0:
+          // Ask the next question
+          addMessageToConversation({
+            text: "What is your approximate credit score?",
+            sender: 'ai',
+            type: 'buttons',
+            options: [{ label: "750+", value: "750+" }, { label: "600+", value: "600+" }]
+          });
+          break;
+        case 1:
+          // Make API call with the user's choices
+          getCreditInformation(updatedChoices);
+          break;
+        default:
+          console.log("Conversation end or unknown step.");
+      }
+    
+      // Move to the next step
+      setStep(prevStep => prevStep + 1);
+    }
   };
 
- 
  // CHAT FEATURES - WORKS FOR ALL PART
  const sendMessage = async (userMessage) => {
   // Update the conversation state immediately with user message
@@ -158,6 +205,30 @@ const Content = ({selectedOption}) => {
     }
   }
 };
+
+// CREDIT CARD INFORMATION
+const getCreditInformation = async (choices) => {
+  if (axiosCancelSource.current) {
+    axiosCancelSource.current.cancel("Cancelling previous request.");
+  }
+  axiosCancelSource.current = axios.CancelToken.source(); // Create a new cancel token source
+
+  try {
+    const response = await axios.post('http://localhost:8080/getCredit', { choices }, {
+      cancelToken: axiosCancelSource.current.token // Use the cancel token in the request
+    });
+
+    addMessageToConversation({
+      text: response.data,
+      sender: 'ai',
+      type: 'json'
+    });
+  } catch (error) {
+    if (!axios.isCancel(error)) {
+      console.error('API call failed:', error);
+    }
+  }
+}
 
 const getLoanInformation = async (choices) => {
   if (axiosCancelSource.current) {

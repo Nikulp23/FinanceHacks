@@ -6,6 +6,8 @@ import CreditFormat from './formats/CreditFormat.jsx';
 const JsonFormat = ({ data, selectedOption }) => {
    // Here, you decide which component to render based on selectedOption
    console.log(data)
+   console.log(data.cards)
+
    if(data === undefined){
     return <div>Unable to access backend data.</div>
    }
