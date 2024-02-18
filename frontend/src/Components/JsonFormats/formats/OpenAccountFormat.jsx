@@ -21,10 +21,10 @@ const OpenAccountFormat = ({ banks }) => {
                   <p><strong>Address:</strong> {bank.address}</p>
 
                   <h3>Account Opening Requirements:</h3>
-                  <p><strong>Identification:</strong> {bank.account_opening_requirements.identification.join(', ')}</p>
-                  <p><strong>Proof of Address:</strong> {bank.account_opening_requirements.proof_of_address.join(', ')}</p>
+                  <p><strong>Identification:</strong> {bank.account_opening_requirements.identification}</p>
+                  <p><strong>Proof of Address:</strong> {bank.account_opening_requirements.proof_of_address}</p>
                   {bank.account_opening_requirements.additional_documents[0] !== "None" &&
-                    <p><strong>Additional Documents:</strong> {bank.account_opening_requirements.additional_documents.join(', ')}</p>
+                    <p><strong>Additional Documents:</strong> {bank.account_opening_requirements.additional_documents}</p>
                   }
 
                   <h3>Types of Accounts:</h3>
