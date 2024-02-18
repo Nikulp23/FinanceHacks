@@ -16,7 +16,6 @@ const JsonFormat = ({ data, selectedOption }) => {
      return <OpenAccountFormat banks={data.banks} />;
    } 
    else if (selectedOption === 'applyLoan') {
-    // return <div>{data}</div>
     return <ApplyFormat loans={data.loans} />;
    }
    else if (selectedOption === 'selectCreditCard') {
