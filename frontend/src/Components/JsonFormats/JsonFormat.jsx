@@ -1,7 +1,7 @@
 import React from 'react';
 import OpenAccountFormat from './formats/OpenAccountFormat.jsx';
 import ApplyFormat from './formats/ApplyFormat.jsx';
-// import CreditFormat from './formats/CreditFormat.jsx';
+import CreditFormat from './formats/CreditFormat.jsx';
 
 const JsonFormat = ({ data, selectedOption }) => {
    // Here, you decide which component to render based on selectedOption
@@ -20,7 +20,7 @@ const JsonFormat = ({ data, selectedOption }) => {
     return <ApplyFormat loans={data.loans} />;
    }
    else if (selectedOption === 'selectCreditCard') {
-    return <div>Select Credit Card</div>
+    return <CreditFormat cards={data.cards} />;
    }
    else {
     return <div>{data}</div>
