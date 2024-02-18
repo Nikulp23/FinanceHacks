@@ -15,6 +15,8 @@ const generationConfig = {
    temperature: 0,
 };
 
+import data from "../prompts/sampleLoan.js";
+
 async function generateLoanDetails(BANK_NAME, LOAN_TYPE, LOAN_AMOUNT, CREDIT_SCORE) {
    // Update the search prompt with the bank's details and other required info
    const updatedSearchPrompt = loanInfoPrompt
@@ -60,13 +62,14 @@ router.post(`/${parsed.name}`, async (req, res) => {
       //    result.loans.forEach((bank) => {
       //      console.log(bank.bankname);
       //    });
-      //  });       
+      //  });
 
       // Send the response
       res.send({loans : filteredResults});
    }).catch(error => {
-   console.error('Error generating bank details:', error);
-      res.status(500).send('An error occurred while processing your request.');
+      // console.error('Error generating bank details:', error);
+      // res.status(500).send('An error occurred while processing your request.');
+      res.send({loans : data});
    });
 });
 
